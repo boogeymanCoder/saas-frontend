@@ -2,26 +2,39 @@
 
 /* eslint-disable */
 import { request } from 'umi';
+import store from 'store';
 /** 获取当前的用户 GET /api/currentUser */
 
 export async function currentUser(options) {
-  return request('/api/currentUser', {
+  const token = store.get('accessToken');
+
+  return request(`${API_URL}/api/user`, {
     method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
     ...(options || {}),
   });
 }
 /** 退出登录接口 POST /api/login/outLogin */
 
 export async function outLogin(options) {
-  return request('/api/login/outLogin', {
+  const token = store.get('accessToken');
+
+  return request(`${API_URL}/api/logout`, {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
     ...(options || {}),
   });
 }
 /** 登录接口 POST /api/login/account */
 
 export async function login(body, options) {
-  return request('/api/login/account', {
+  return request(`${API_URL}/api/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

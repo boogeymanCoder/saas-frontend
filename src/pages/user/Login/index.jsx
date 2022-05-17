@@ -14,6 +14,7 @@ import Footer from '@/components/Footer';
 import { login } from '@/services/ant-design-pro/api';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
 import styles from './index.less';
+import store from 'store';
 
 const LoginMessage = ({ content }) => (
   <Alert
@@ -44,13 +45,16 @@ const Login = () => {
     try {
       // 登录
       const msg = await login({ ...values, type });
+      console.log({ msg });
 
-      if (msg.status === 'ok') {
+      if (msg.success) {
         const defaultLoginSuccessMessage = intl.formatMessage({
           id: 'pages.login.success',
           defaultMessage: '登录成功！',
         });
         message.success(defaultLoginSuccessMessage);
+
+        store.set('accessToken', msg.data.token);
         await fetchUserInfo();
         /** 此方法会跳转到 redirect 参数所在的位置 */
 
@@ -131,7 +135,7 @@ const Login = () => {
           {type === 'account' && (
             <>
               <ProFormText
-                name="username"
+                name="email"
                 fieldProps={{
                   size: 'large',
                   prefix: <UserOutlined className={styles.prefixIcon} />,
