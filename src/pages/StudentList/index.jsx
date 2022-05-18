@@ -109,6 +109,7 @@ const TableList = () => {
       tip: 'The ID is the unique key',
       fixed: 'left',
       width: 50,
+      search: false,
       render: (dom, entity) => {
         return (
           <a
@@ -125,39 +126,60 @@ const TableList = () => {
     {
       title: <FormattedMessage id="pages.studentTable.firstName" defaultMessage="First name" />,
       dataIndex: 'first_name',
+      key: 'filter[first_name]',
       width: 100,
     },
     {
       title: <FormattedMessage id="pages.studentTable.middleName" defaultMessage="Middle name" />,
       dataIndex: 'middle_name',
+      key: 'filter[middle_name]',
       width: 100,
     },
     {
       title: <FormattedMessage id="pages.studentTable.lastName" defaultMessage="Last name" />,
       dataIndex: 'last_name',
+      key: 'filter[last_name]',
       width: 100,
     },
     {
       title: <FormattedMessage id="pages.studentTable.address" defaultMessage="Address" />,
       dataIndex: 'address',
+      key: 'filter[address]',
     },
     {
       title: <FormattedMessage id="pages.studentTable.birthday" defaultMessage="Birthday" />,
       dataIndex: 'birthday',
+      key: 'filter[birthday]',
       width: 100,
     },
     {
       title: <FormattedMessage id="pages.studentTable.gender" defaultMessage="Gender" />,
       dataIndex: 'gender',
+      valueType: 'select',
+      fieldProps: {
+        options: [
+          {
+            label: 'Male',
+            value: 'Male',
+          },
+          {
+            label: 'Female',
+            value: 'Female',
+          },
+        ],
+      },
+      key: 'filter[gender]', // TODO make selector
       width: 75,
     },
     {
       title: <FormattedMessage id="pages.studentTable.phoneNumber" defaultMessage="Phone number" />,
       dataIndex: 'number',
+      key: 'filter[number]',
     },
     {
       title: <FormattedMessage id="pages.studentTable.email" defaultMessage="Email" />,
       dataIndex: 'email',
+      key: 'filter[email]',
     },
     {
       title: <FormattedMessage id="pages.table.actions" defaultMessage="Actions" />,
@@ -207,7 +229,15 @@ const TableList = () => {
             <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
           </Button>,
         ]}
-        request={student}
+        request={(params, sort, filter) => {
+          console.log({ params, sort, filter });
+          const parameters = {
+            ...params,
+            'page[number]': params.current,
+            'page[size]': params.pageSize,
+          };
+          return student(parameters);
+        }}
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {

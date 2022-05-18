@@ -79,6 +79,6 @@ export default {
   'pages.studentTable.address': 'Address',
   'pages.studentTable.birthday': 'Birthday',
   'pages.studentTable.gender': 'Gender',
-  'pages.studentTable.phoneNumber': 'Phone umber',
+  'pages.studentTable.phoneNumber': 'Phone number',
   'pages.studentTable.email': 'Email',
 };
