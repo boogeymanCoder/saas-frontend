@@ -127,29 +127,35 @@ const TableList = () => {
       title: <FormattedMessage id="pages.studentTable.firstName" defaultMessage="First name" />,
       dataIndex: 'first_name',
       key: 'filter[first_name]',
+      defaultSortOrder: 'ascend',
+      sorter: true,
       width: 100,
     },
     {
       title: <FormattedMessage id="pages.studentTable.middleName" defaultMessage="Middle name" />,
       dataIndex: 'middle_name',
       key: 'filter[middle_name]',
+      sorter: true,
       width: 100,
     },
     {
       title: <FormattedMessage id="pages.studentTable.lastName" defaultMessage="Last name" />,
       dataIndex: 'last_name',
       key: 'filter[last_name]',
+      sorter: true,
       width: 100,
     },
     {
       title: <FormattedMessage id="pages.studentTable.address" defaultMessage="Address" />,
       dataIndex: 'address',
       key: 'filter[address]',
+      sorter: true,
     },
     {
       title: <FormattedMessage id="pages.studentTable.birthday" defaultMessage="Birthday" />,
       dataIndex: 'birthday',
       key: 'filter[birthday]',
+      sorter: true,
       width: 100,
     },
     {
@@ -168,18 +174,20 @@ const TableList = () => {
           },
         ],
       },
-      key: 'filter[gender]', // TODO make selector
+      key: 'filter[gender]',
       width: 75,
     },
     {
       title: <FormattedMessage id="pages.studentTable.phoneNumber" defaultMessage="Phone number" />,
       dataIndex: 'number',
       key: 'filter[number]',
+      sorter: true,
     },
     {
       title: <FormattedMessage id="pages.studentTable.email" defaultMessage="Email" />,
       dataIndex: 'email',
       key: 'filter[email]',
+      sorter: true,
     },
     {
       title: <FormattedMessage id="pages.table.actions" defaultMessage="Actions" />,
@@ -230,11 +238,18 @@ const TableList = () => {
           </Button>,
         ]}
         request={(params, sort, filter) => {
-          console.log({ params, sort, filter });
+          let sorter = Object.entries(sort);
+          console.log({ params, sort, sorter, filter });
           const parameters = {
             ...params,
             'page[number]': params.current,
             'page[size]': params.pageSize,
+            sort:
+              sorter.length === 0
+                ? undefined
+                : sorter[0][1] === 'ascend'
+                ? sorter[0][0]
+                : `-${sorter[0][0]}`,
           };
           return student(parameters);
         }}
