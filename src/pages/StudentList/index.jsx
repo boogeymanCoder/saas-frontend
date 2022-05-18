@@ -375,10 +375,11 @@ const TableList = () => {
         }}
         closable={false}
       >
-        {currentRow?.name && (
+        {console.log({ currentRow })}
+        {currentRow && (
           <ProDescriptions
             column={2}
-            title={currentRow?.name}
+            title={`${currentRow?.first_name} ${currentRow?.middle_name} ${currentRow?.last_name}`}
             request={async () => ({
               data: currentRow || {},
             })}
