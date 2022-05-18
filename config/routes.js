@@ -43,6 +43,12 @@ export default [
     component: './TableList',
   },
   {
+    name: 'list.student-list',
+    icon: 'table',
+    path: '/students',
+    component: './StudentList',
+  },
+  {
     path: '/',
     redirect: '/welcome',
   },
