@@ -12,9 +12,8 @@ import {
   ProFormTextArea,
 } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
-import UpdateForm from './components/UpdateForm';
 import { rule, addRule, updateRule, removeRule } from '@/services/ant-design-pro/api';
-import { addStudent, removeStudent, student } from '@/services/students';
+import { addStudent, removeStudent, student, updateStudent } from '@/services/students';
 /**
  * @en-US Add node
  * @zh-CN 添加节点
@@ -44,15 +43,11 @@ const handleAdd = async (fields) => {
  * @param fields
  */
 
-const handleUpdate = async (fields) => {
+const handleUpdate = async (id, fields) => {
   const hide = message.loading('Configuring');
 
   try {
-    await updateRule({
-      name: fields.name,
-      desc: fields.desc,
-      key: fields.key,
-    });
+    await updateStudent(id, fields);
     hide();
     message.success('Configuration is successful');
     return true;
@@ -458,29 +453,134 @@ const TableList = () => {
           name="email"
         />
       </ModalForm>
-      <UpdateForm
-        onSubmit={async (value) => {
-          const success = await handleUpdate(value);
 
-          if (success) {
-            handleUpdateModalVisible(false);
-            setCurrentRow(undefined);
+      {currentRow && updateModalVisible && (
+        <ModalForm
+          title={intl.formatMessage({
+            id: 'pages.studentTable.editStudent',
+            defaultMessage: 'Edit Student',
+          })}
+          width="400px"
+          visible={updateModalVisible}
+          onVisibleChange={handleUpdateModalVisible}
+          onFinish={async (value) => {
+            const success = await handleUpdate(currentRow.id, value);
 
-            if (actionRef.current) {
-              actionRef.current.reload();
+            if (success) {
+              handleUpdateModalVisible(false);
+
+              if (actionRef.current) {
+                actionRef.current.reload();
+              }
             }
-          }
-        }}
-        onCancel={() => {
-          handleUpdateModalVisible(false);
-
-          if (!showDetail) {
-            setCurrentRow(undefined);
-          }
-        }}
-        updateModalVisible={updateModalVisible}
-        values={currentRow || {}}
-      />
+          }}
+        >
+          <ProFormText
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+            label={intl.formatMessage({
+              id: 'pages.studentTable.firstName',
+              defaultMessage: 'First name',
+            })}
+            name="first_name"
+            initialValue={currentRow && currentRow.first_name}
+          />
+          <ProFormText
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+            label={intl.formatMessage({
+              id: 'pages.studentTable.middleName',
+              defaultMessage: 'Middle name',
+            })}
+            name="middle_name"
+            initialValue={currentRow && currentRow.middle_name}
+          />
+          <ProFormText
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+            label={intl.formatMessage({
+              id: 'pages.studentTable.lastName',
+              defaultMessage: 'Last name',
+            })}
+            name="last_name"
+            initialValue={currentRow && currentRow.last_name}
+          />
+          <ProFormTextArea
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+            label={intl.formatMessage({
+              id: 'pages.studentTable.address',
+              defaultMessage: 'Address',
+            })}
+            name="address"
+            initialValue={currentRow && currentRow.address}
+          />
+          <ProFormDatePicker
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+            label={intl.formatMessage({
+              id: 'pages.studentTable.birthday',
+              defaultMessage: 'Birthday',
+            })}
+            name="birthday"
+            initialValue={currentRow && currentRow.birthday}
+          />
+          <ProFormSelect
+            rules={[{ required: true }]}
+            label={intl.formatMessage({
+              id: 'pages.studentTable.gender',
+              defaultMessage: 'Gender',
+            })}
+            name="gender"
+            valueEnum={{
+              Male: 'Male',
+              Female: 'Female',
+            }}
+            initialValue={currentRow && currentRow.gender}
+          />
+          <ProFormText
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+            label={intl.formatMessage({
+              id: 'pages.studentTable.phoneNumber',
+              defaultMessage: 'Phone number',
+            })}
+            name="number"
+            initialValue={currentRow && currentRow.number}
+          />
+          <ProFormText
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+            label={intl.formatMessage({
+              id: 'pages.studentTable.email',
+              defaultMessage: 'Email',
+            })}
+            name="email"
+            initialValue={currentRow && currentRow.email}
+          />
+        </ModalForm>
+      )}
 
       <Drawer
         width={600}

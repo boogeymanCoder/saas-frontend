@@ -26,14 +26,22 @@ export async function student(params, options) {
     });
 }
 
-// /** 新建规则 PUT /api/rule */
+/** 新建规则 PUT /api/rule */
 
-// export async function updateRule(options) {
-//   return request('/api/rule', {
-//     method: 'PUT',
-//     ...(options || {}),
-//   });
-// }
+export async function updateStudent(id, params, options) {
+  const domain = getDomain();
+  const token = store.get('accessToken');
+
+  return request(`${PROTOCOL}//${domain}.${HOST_NAME}/api/students/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    params,
+    ...(options || {}),
+  });
+}
 /** 新建规则 POST /api/rule */
 
 export async function addStudent(params, options) {
