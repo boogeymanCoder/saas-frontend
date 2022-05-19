@@ -108,4 +108,10 @@ export default {
   'pages.classroomTable.subjectId': 'Subject ID',
   'pages.classroomTable.editClassroom': 'Edit Classroom',
   'pages.classroomTable.newClassroom': 'New Classroom',
+
+  'pages.subjectTable.id': 'ID',
+  'pages.subjectTable.name': 'Name',
+  'pages.subjectTable.code': 'Code',
+  'pages.subjectTable.editSubject': 'Edit Subject',
+  'pages.subjectTable.newSubject': 'New Subject',
 };
