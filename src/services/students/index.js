@@ -1,18 +1,29 @@
 import { request } from 'umi';
 import { currentUser } from '../ant-design-pro/api';
+import { getDomain } from '../helpers';
+import store from 'store';
 
 export async function student(params, options) {
-  const user = await currentUser();
+  const domain = getDomain();
+  const token = store.get('accessToken');
 
-  return request(`http://${user.tenant.id}.${HOST_NAME}/api/students`, {
+  return request(`${PROTOCOL}//${domain}.${HOST_NAME}/api/students`, {
     method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
     params: { ...params },
     ...(options || {}),
-  }).then((res) => {
-    console.log({ res });
-    res.data.forEach((data) => (data.key = data.id));
-    return res;
-  });
+  })
+    .then((res) => {
+      console.log({ res });
+      res.data.forEach((data) => (data.key = data.id));
+      return res;
+    })
+    .catch((err) => {
+      console.log({ err });
+    });
 }
 
 // /** 新建规则 PUT /api/rule */
@@ -26,9 +37,15 @@ export async function student(params, options) {
 /** 新建规则 POST /api/rule */
 
 export async function addStudent(params, options) {
-  const user = await currentUser();
-  return request(`http://${user.tenant.id}.${HOST_NAME}/api/students`, {
+  const domain = getDomain();
+  const token = store.get('accessToken');
+
+  return request(`${PROTOCOL}//${domain}.${HOST_NAME}/api/students`, {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
     params,
     ...(options || {}),
   });
