@@ -67,4 +67,23 @@ export default {
   'pages.searchTable.tenThousand': '0000',
   'pages.searchTable.batchDeletion': 'bacth deletion',
   'pages.searchTable.batchApproval': 'batch approval',
+
+  // added locales
+  'pages.table.actions': 'Actions',
+  'pages.table.edit': 'Edit',
+  'pages.table.delete': 'Delete',
+  'pages.table.areYouSure': 'Are you sure?',
+  'pages.table.yes': 'Yes',
+  'pages.table.no': 'No',
+  'pages.studentTable.id': 'ID',
+  'pages.studentTable.firstName': 'First name',
+  'pages.studentTable.middleName': 'Middle name',
+  'pages.studentTable.lastName': 'Last name',
+  'pages.studentTable.address': 'Address',
+  'pages.studentTable.birthday': 'Birthday',
+  'pages.studentTable.gender': 'Gender',
+  'pages.studentTable.phoneNumber': 'Phone number',
+  'pages.studentTable.email': 'Email',
+  'pages.studentTable.editStudent': 'Edit Student',
+  'pages.studentTable.newStudent': 'New Student',
 };

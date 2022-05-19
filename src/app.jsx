@@ -21,7 +21,8 @@ export async function getInitialState() {
   const fetchUserInfo = async () => {
     try {
       const msg = await queryCurrentUser();
-      return msg.data;
+      console.log({ data: msg });
+      return msg;
     } catch (error) {
       history.push(loginPath);
     }
@@ -48,9 +49,6 @@ export const layout = ({ initialState, setInitialState }) => {
   return {
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
-    waterMarkProps: {
-      content: initialState?.currentUser?.name,
-    },
     footerRender: () => <Footer />,
     onPageChange: () => {
       const { location } = history; // 如果没有登录，重定向到 login

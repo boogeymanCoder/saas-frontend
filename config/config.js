@@ -6,6 +6,12 @@ import proxy from './proxy';
 import routes from './routes';
 const { REACT_APP_ENV } = process.env;
 export default defineConfig({
+  define: {
+    API_URL: process.env.API_URL,
+    HOST_NAME: process.env.HOST_NAME,
+    PROTOCOL: process.env.PROTOCOL,
+    PORT: process.env.PORT,
+  },
   hash: true,
   antd: {},
   dva: {
