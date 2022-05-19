@@ -12,7 +12,7 @@ import {
   ProFormTextArea,
 } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
-import { addClassroom, classroom, removeClassroom, updateClassroom } from '@/services/classroom';
+import { addSubject, subject, removeSubject, updateSubject } from '@/services/subject';
 /**
  * @en-US Add node
  * @zh-CN 添加节点
@@ -24,7 +24,7 @@ const handleAdd = async (fields) => {
   console.log({ fields });
 
   try {
-    await addClassroom({ ...fields });
+    await addSubject({ ...fields });
     hide();
     message.success('Added successfully');
     return true;
@@ -46,7 +46,7 @@ const handleUpdate = async (id, fields) => {
   const hide = message.loading('Configuring');
 
   try {
-    await updateClassroom(id, fields);
+    await updateSubject(id, fields);
     hide();
     message.success('Configuration is successful');
     return true;
@@ -71,7 +71,7 @@ const handleRemove = async (selectedRows) => {
     // await removeRule({
     //   key: selectedRows.map((row) => row.key),
     // });
-    selectedRows.map(async (student) => await removeClassroom(student.id));
+    selectedRows.map(async (student) => await removeSubject(student.id));
     hide();
     message.success('Deleted successfully and will refresh soon');
     return true;
@@ -127,7 +127,7 @@ const TableList = () => {
       },
     },
     {
-      title: <FormattedMessage id="pages.classroomTable.name" defaultMessage="Name" />,
+      title: <FormattedMessage id="pages.subjectTable.name" defaultMessage="Name" />,
       dataIndex: 'name',
       key: 'filter[name]',
       defaultSortOrder: 'ascend',
@@ -135,29 +135,17 @@ const TableList = () => {
       width: 100,
     },
     {
-      title: <FormattedMessage id="pages.classroomTable.code" defaultMessage="Code" />,
+      title: <FormattedMessage id="pages.subjectTable.code" defaultMessage="Code" />,
       dataIndex: 'code',
       key: 'filter[code]',
       sorter: true,
       width: 100,
     },
     {
-      title: <FormattedMessage id="pages.classroomTable.teacher" defaultMessage="Teacher" />,
-      dataIndex: 'teacher_id',
-      key: 'filter[teacher_id]',
-      width: 100,
-    },
-    {
-      title: <FormattedMessage id="pages.classroomTable.subject" defaultMessage="Subject" />,
-      dataIndex: 'subject_id',
-      key: 'filter[subject_id]',
-      width: 100,
-    },
-    {
       title: <FormattedMessage id="pages.table.actions" defaultMessage="Actions" />,
       dataIndex: 'option',
       valueType: 'option',
-      width: 100,
+      width: 50,
       fixed: 'right',
       render: (_, record) => [
         <a
@@ -204,7 +192,7 @@ const TableList = () => {
           defaultMessage: 'Enquiry form',
         })}
         scroll={{
-          x: 550,
+          x: 300,
         }}
         actionRef={actionRef}
         rowKey="key"
@@ -236,7 +224,7 @@ const TableList = () => {
                 ? sorter[0][0]
                 : `-${sorter[0][0]}`,
           };
-          return classroom(parameters);
+          return subject(parameters);
         }}
         columns={columns}
       />
@@ -318,7 +306,7 @@ const TableList = () => {
             },
           ]}
           label={intl.formatMessage({
-            id: 'pages.classroomTable.name',
+            id: 'pages.subjectTable.name',
             defaultMessage: 'Name',
           })}
           name="name"
@@ -330,34 +318,10 @@ const TableList = () => {
             },
           ]}
           label={intl.formatMessage({
-            id: 'pages.classroomTable.code',
+            id: 'pages.subjectTable.code',
             defaultMessage: 'Code',
           })}
           name="code"
-        />
-        <ProFormText
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-          label={intl.formatMessage({
-            id: 'pages.classroomTable.teacherId',
-            defaultMessage: 'Teacher ID',
-          })}
-          name="teacher_id"
-        />
-        <ProFormText
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-          label={intl.formatMessage({
-            id: 'pages.classroomTable.subjectId',
-            defaultMessage: 'Subject ID',
-          })}
-          name="subject_id"
         />
       </ModalForm>
 
@@ -389,7 +353,7 @@ const TableList = () => {
               },
             ]}
             label={intl.formatMessage({
-              id: 'pages.classroomTable.name',
+              id: 'pages.subjectTable.name',
               defaultMessage: 'Name',
             })}
             name="name"
@@ -402,37 +366,11 @@ const TableList = () => {
               },
             ]}
             label={intl.formatMessage({
-              id: 'pages.classroomTable.code',
+              id: 'pages.subjectTable.code',
               defaultMessage: 'Code',
             })}
             name="code"
             initialValue={currentRow && currentRow.code}
-          />
-          <ProFormText
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-            label={intl.formatMessage({
-              id: 'pages.classroomTable.teacherId',
-              defaultMessage: 'Teacher ID',
-            })}
-            name="teacher_id"
-            initialValue={currentRow && currentRow.teacher_id}
-          />
-          <ProFormText
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-            label={intl.formatMessage({
-              id: 'pages.classroomTable.subjectId',
-              defaultMessage: 'Subject ID',
-            })}
-            name="subject_id"
-            initialValue={currentRow && currentRow.subject_id}
           />
         </ModalForm>
       )}
@@ -450,7 +388,7 @@ const TableList = () => {
         {currentRow && (
           <ProDescriptions
             column={1}
-            title={`${currentRow?.name} [${currentRow?.code}]`}
+            title={`${currentRow?.first_name} ${currentRow?.middle_name} ${currentRow?.last_name}`}
             request={async () => ({
               data: currentRow || {},
             })}

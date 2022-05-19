@@ -53,4 +53,5 @@ export default {
   'menu.list.student-list': 'Student Table',
   'menu.list.teacher-list': 'Teacher Table',
   'menu.list.classroom-list': 'Classroom Table',
+  'menu.list.subject-list': 'Subject Table',
 };
