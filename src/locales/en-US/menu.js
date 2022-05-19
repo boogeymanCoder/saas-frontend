@@ -23,8 +23,6 @@ export default {
   'menu.form.advanced-form': 'Advanced Form',
   'menu.list': 'List',
   'menu.list.table-list': 'Search Table',
-  'menu.list.student-list': 'Student Table',
-  'menu.list.teacher-list': 'Teacher Table',
   'menu.list.basic-list': 'Basic List',
   'menu.list.card-list': 'Card List',
   'menu.list.search-list': 'Search List',
@@ -51,4 +49,8 @@ export default {
   'menu.editor.flow': 'Flow Editor',
   'menu.editor.mind': 'Mind Editor',
   'menu.editor.koni': 'Koni Editor',
+
+  'menu.list.student-list': 'Student Table',
+  'menu.list.teacher-list': 'Teacher Table',
+  'menu.list.classroom-list': 'Classroom Table',
 };

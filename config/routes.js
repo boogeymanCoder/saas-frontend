@@ -37,10 +37,10 @@ export default [
     ],
   },
   {
-    name: 'list.table-list',
+    name: 'list.classroom-list',
     icon: 'table',
-    path: '/list',
-    component: './TableList',
+    path: '/classrooms',
+    component: './ClassroomList',
   },
   {
     name: 'list.student-list',

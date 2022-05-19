@@ -98,4 +98,14 @@ export default {
   'pages.teacherTable.email': 'Email',
   'pages.teacherTable.editTeacher': 'Edit Teacher',
   'pages.teacherTable.newTeacher': 'New Teacher',
+
+  'pages.classroomTable.id': 'ID',
+  'pages.classroomTable.name': 'Name',
+  'pages.classroomTable.code': 'Code',
+  'pages.classroomTable.teacher': 'Teacher',
+  'pages.classroomTable.subject': 'Subject',
+  'pages.classroomTable.teacherId': 'Teacher ID',
+  'pages.classroomTable.subjectId': 'Subject ID',
+  'pages.classroomTable.editClassroom': 'Edit Classroom',
+  'pages.classroomTable.newClassroom': 'New Classroom',
 };
