@@ -24,6 +24,7 @@ export default {
   'menu.list': 'List',
   'menu.list.table-list': 'Search Table',
   'menu.list.student-list': 'Student Table',
+  'menu.list.teacher-list': 'Teacher Table',
   'menu.list.basic-list': 'Basic List',
   'menu.list.card-list': 'Card List',
   'menu.list.search-list': 'Search List',
