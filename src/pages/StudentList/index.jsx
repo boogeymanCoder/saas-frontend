@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Input, Drawer } from 'antd';
+import { Button, message, Input, Drawer, Popconfirm } from 'antd';
 import React, { useState, useRef } from 'react';
 import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
@@ -14,7 +14,7 @@ import {
 import ProDescriptions from '@ant-design/pro-descriptions';
 import UpdateForm from './components/UpdateForm';
 import { rule, addRule, updateRule, removeRule } from '@/services/ant-design-pro/api';
-import { addStudent, student } from '@/services/students';
+import { addStudent, removeStudent, student } from '@/services/students';
 /**
  * @en-US Add node
  * @zh-CN 添加节点
@@ -74,9 +74,10 @@ const handleRemove = async (selectedRows) => {
   if (!selectedRows) return true;
 
   try {
-    await removeRule({
-      key: selectedRows.map((row) => row.key),
-    });
+    // await removeRule({
+    //   key: selectedRows.map((row) => row.key),
+    // });
+    selectedRows.map(async (student) => await removeStudent(student.id));
     hide();
     message.success('Deleted successfully and will refresh soon');
     return true;
@@ -213,9 +214,30 @@ const TableList = () => {
         >
           <FormattedMessage id="pages.table.edit" defaultMessage="Edit" />
         </a>,
-        <a key="delete" href="https://procomponents.ant.design/">
-          <FormattedMessage id="pages.table.delete" defaultMessage="Delete" />
-        </a>,
+
+        <Popconfirm
+          key="delete"
+          title={intl.formatMessage({
+            id: 'pages.table.areYouSure',
+            defaultMessage: 'Are you sure?',
+          })}
+          okText={intl.formatMessage({
+            id: 'pages.table.yes',
+            defaultMessage: 'Yes',
+          })}
+          cancelText={intl.formatMessage({
+            id: 'pages.table.no',
+            defaultMessage: 'No',
+          })}
+          onConfirm={async () => {
+            await handleRemove([record]);
+            actionRef.current?.reloadAndRest?.();
+          }}
+        >
+          <a href="#">
+            <FormattedMessage id="pages.table.delete" defaultMessage="Delete" />
+          </a>
+        </Popconfirm>,
       ],
     },
   ];
@@ -293,24 +315,30 @@ const TableList = () => {
             </div>
           }
         >
-          <Button
-            onClick={async () => {
+          <Popconfirm
+            key="delete"
+            title={intl.formatMessage({
+              id: 'pages.table.areYouSure',
+              defaultMessage: 'Are you sure?',
+            })}
+            okText={intl.formatMessage({
+              id: 'pages.table.yes',
+              defaultMessage: 'Yes',
+            })}
+            cancelText={intl.formatMessage({
+              id: 'pages.table.no',
+              defaultMessage: 'No',
+            })}
+            onConfirm={async () => {
               await handleRemove(selectedRowsState);
               setSelectedRows([]);
               actionRef.current?.reloadAndRest?.();
             }}
           >
-            <FormattedMessage
-              id="pages.searchTable.batchDeletion"
-              defaultMessage="Batch deletion"
-            />
-          </Button>
-          <Button type="primary">
-            <FormattedMessage
-              id="pages.searchTable.batchApproval"
-              defaultMessage="Batch approval"
-            />
-          </Button>
+            <Button type="primary" danger>
+              <FormattedMessage id="pages.table.delete" defaultMessage="Delete" />
+            </Button>
+          </Popconfirm>
         </FooterToolbar>
       )}
       <ModalForm

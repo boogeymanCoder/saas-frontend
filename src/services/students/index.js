@@ -50,11 +50,18 @@ export async function addStudent(params, options) {
     ...(options || {}),
   });
 }
-// /** 删除规则 DELETE /api/rule */
+/** 删除规则 DELETE /api/rule */
 
-// export async function removeRule(options) {
-//   return request('/api/rule', {
-//     method: 'DELETE',
-//     ...(options || {}),
-//   });
-// }
+export async function removeStudent(id, options) {
+  const domain = getDomain();
+  const token = store.get('accessToken');
+
+  return request(`${PROTOCOL}//${domain}.${HOST_NAME}/api/students/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    ...(options || {}),
+  });
+}
