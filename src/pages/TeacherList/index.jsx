@@ -12,8 +12,7 @@ import {
   ProFormTextArea,
 } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
-import { rule, addRule, updateRule, removeRule } from '@/services/ant-design-pro/api';
-import { addStudent, removeStudent, student, updateStudent } from '@/services/students';
+import { addTeacher, removeTeacher, teacher, updateTeacher } from '@/services/teacher';
 /**
  * @en-US Add node
  * @zh-CN 添加节点
@@ -25,7 +24,7 @@ const handleAdd = async (fields) => {
   console.log({ fields });
 
   try {
-    await addStudent({ ...fields });
+    await addTeacher({ ...fields });
     hide();
     message.success('Added successfully');
     return true;
@@ -47,7 +46,7 @@ const handleUpdate = async (id, fields) => {
   const hide = message.loading('Configuring');
 
   try {
-    await updateStudent(id, fields);
+    await updateTeacher(id, fields);
     hide();
     message.success('Configuration is successful');
     return true;
@@ -72,7 +71,7 @@ const handleRemove = async (selectedRows) => {
     // await removeRule({
     //   key: selectedRows.map((row) => row.key),
     // });
-    selectedRows.map(async (student) => await removeStudent(student.id));
+    selectedRows.map(async (teacher) => await removeTeacher(teacher.id));
     hide();
     message.success('Deleted successfully and will refresh soon');
     return true;
@@ -108,7 +107,7 @@ const TableList = () => {
   const intl = useIntl();
   const columns = [
     {
-      title: <FormattedMessage id="pages.studentTable.id" defaultMessage="ID" />,
+      title: <FormattedMessage id="pages.teacherTable.id" defaultMessage="ID" />,
       dataIndex: 'id',
       tip: 'The ID is the unique key',
       fixed: 'left',
@@ -128,7 +127,7 @@ const TableList = () => {
       },
     },
     {
-      title: <FormattedMessage id="pages.studentTable.firstName" defaultMessage="First name" />,
+      title: <FormattedMessage id="pages.teacherTable.firstName" defaultMessage="First name" />,
       dataIndex: 'first_name',
       key: 'filter[first_name]',
       defaultSortOrder: 'ascend',
@@ -136,34 +135,34 @@ const TableList = () => {
       width: 100,
     },
     {
-      title: <FormattedMessage id="pages.studentTable.middleName" defaultMessage="Middle name" />,
+      title: <FormattedMessage id="pages.teacherTable.middleName" defaultMessage="Middle name" />,
       dataIndex: 'middle_name',
       key: 'filter[middle_name]',
       sorter: true,
       width: 100,
     },
     {
-      title: <FormattedMessage id="pages.studentTable.lastName" defaultMessage="Last name" />,
+      title: <FormattedMessage id="pages.teacherTable.lastName" defaultMessage="Last name" />,
       dataIndex: 'last_name',
       key: 'filter[last_name]',
       sorter: true,
       width: 100,
     },
     {
-      title: <FormattedMessage id="pages.studentTable.address" defaultMessage="Address" />,
+      title: <FormattedMessage id="pages.teacherTable.address" defaultMessage="Address" />,
       dataIndex: 'address',
       key: 'filter[address]',
       sorter: true,
     },
     {
-      title: <FormattedMessage id="pages.studentTable.birthday" defaultMessage="Birthday" />,
+      title: <FormattedMessage id="pages.teacherTable.birthday" defaultMessage="Birthday" />,
       dataIndex: 'birthday',
       key: 'filter[birthday]',
       sorter: true,
       width: 100,
     },
     {
-      title: <FormattedMessage id="pages.studentTable.gender" defaultMessage="Gender" />,
+      title: <FormattedMessage id="pages.teacherTable.gender" defaultMessage="Gender" />,
       dataIndex: 'gender',
       valueType: 'select',
       fieldProps: {
@@ -182,13 +181,13 @@ const TableList = () => {
       width: 75,
     },
     {
-      title: <FormattedMessage id="pages.studentTable.phoneNumber" defaultMessage="Phone number" />,
+      title: <FormattedMessage id="pages.teacherTable.phoneNumber" defaultMessage="Phone number" />,
       dataIndex: 'number',
       key: 'filter[number]',
       sorter: true,
     },
     {
-      title: <FormattedMessage id="pages.studentTable.email" defaultMessage="Email" />,
+      title: <FormattedMessage id="pages.teacherTable.email" defaultMessage="Email" />,
       dataIndex: 'email',
       key: 'filter[email]',
       sorter: true,
@@ -276,7 +275,7 @@ const TableList = () => {
                 ? sorter[0][0]
                 : `-${sorter[0][0]}`,
           };
-          return student(parameters);
+          return teacher(parameters);
         }}
         columns={columns}
         rowSelection={{
@@ -338,8 +337,8 @@ const TableList = () => {
       )}
       <ModalForm
         title={intl.formatMessage({
-          id: 'pages.studentTable.newStudent',
-          defaultMessage: 'New Student',
+          id: 'pages.teacherTable.newTeacher',
+          defaultMessage: 'New Teacher',
         })}
         width="400px"
         visible={createModalVisible}
@@ -363,7 +362,7 @@ const TableList = () => {
             },
           ]}
           label={intl.formatMessage({
-            id: 'pages.studentTable.firstName',
+            id: 'pages.teacherTable.firstName',
             defaultMessage: 'First name',
           })}
           name="first_name"
@@ -375,7 +374,7 @@ const TableList = () => {
             },
           ]}
           label={intl.formatMessage({
-            id: 'pages.studentTable.middleName',
+            id: 'pages.teacherTable.middleName',
             defaultMessage: 'Middle name',
           })}
           name="middle_name"
@@ -387,7 +386,7 @@ const TableList = () => {
             },
           ]}
           label={intl.formatMessage({
-            id: 'pages.studentTable.lastName',
+            id: 'pages.teacherTable.lastName',
             defaultMessage: 'Last name',
           })}
           name="last_name"
@@ -399,7 +398,7 @@ const TableList = () => {
             },
           ]}
           label={intl.formatMessage({
-            id: 'pages.studentTable.address',
+            id: 'pages.teacherTable.address',
             defaultMessage: 'Address',
           })}
           name="address"
@@ -411,7 +410,7 @@ const TableList = () => {
             },
           ]}
           label={intl.formatMessage({
-            id: 'pages.studentTable.birthday',
+            id: 'pages.teacherTable.birthday',
             defaultMessage: 'Birthday',
           })}
           name="birthday"
@@ -419,7 +418,7 @@ const TableList = () => {
         <ProFormSelect
           rules={[{ required: true }]}
           label={intl.formatMessage({
-            id: 'pages.studentTable.gender',
+            id: 'pages.teacherTable.gender',
             defaultMessage: 'Gender',
           })}
           name="gender"
@@ -435,7 +434,7 @@ const TableList = () => {
             },
           ]}
           label={intl.formatMessage({
-            id: 'pages.studentTable.phoneNumber',
+            id: 'pages.teacherTable.phoneNumber',
             defaultMessage: 'Phone number',
           })}
           name="number"
@@ -447,7 +446,7 @@ const TableList = () => {
             },
           ]}
           label={intl.formatMessage({
-            id: 'pages.studentTable.email',
+            id: 'pages.teacherTable.email',
             defaultMessage: 'Email',
           })}
           name="email"
@@ -457,8 +456,8 @@ const TableList = () => {
       {currentRow && updateModalVisible && (
         <ModalForm
           title={intl.formatMessage({
-            id: 'pages.studentTable.editStudent',
-            defaultMessage: 'Edit Student',
+            id: 'pages.teacherTable.editTeacher',
+            defaultMessage: 'Edit Teacher',
           })}
           width="400px"
           visible={updateModalVisible}
@@ -482,7 +481,7 @@ const TableList = () => {
               },
             ]}
             label={intl.formatMessage({
-              id: 'pages.studentTable.firstName',
+              id: 'pages.teacherTable.firstName',
               defaultMessage: 'First name',
             })}
             name="first_name"
@@ -495,7 +494,7 @@ const TableList = () => {
               },
             ]}
             label={intl.formatMessage({
-              id: 'pages.studentTable.middleName',
+              id: 'pages.teacherTable.middleName',
               defaultMessage: 'Middle name',
             })}
             name="middle_name"
@@ -508,7 +507,7 @@ const TableList = () => {
               },
             ]}
             label={intl.formatMessage({
-              id: 'pages.studentTable.lastName',
+              id: 'pages.teacherTable.lastName',
               defaultMessage: 'Last name',
             })}
             name="last_name"
@@ -521,7 +520,7 @@ const TableList = () => {
               },
             ]}
             label={intl.formatMessage({
-              id: 'pages.studentTable.address',
+              id: 'pages.teacherTable.address',
               defaultMessage: 'Address',
             })}
             name="address"
@@ -534,7 +533,7 @@ const TableList = () => {
               },
             ]}
             label={intl.formatMessage({
-              id: 'pages.studentTable.birthday',
+              id: 'pages.teacherTable.birthday',
               defaultMessage: 'Birthday',
             })}
             name="birthday"
@@ -543,7 +542,7 @@ const TableList = () => {
           <ProFormSelect
             rules={[{ required: true }]}
             label={intl.formatMessage({
-              id: 'pages.studentTable.gender',
+              id: 'pages.teacherTable.gender',
               defaultMessage: 'Gender',
             })}
             name="gender"
@@ -560,7 +559,7 @@ const TableList = () => {
               },
             ]}
             label={intl.formatMessage({
-              id: 'pages.studentTable.phoneNumber',
+              id: 'pages.teacherTable.phoneNumber',
               defaultMessage: 'Phone number',
             })}
             name="number"
@@ -573,7 +572,7 @@ const TableList = () => {
               },
             ]}
             label={intl.formatMessage({
-              id: 'pages.studentTable.email',
+              id: 'pages.teacherTable.email',
               defaultMessage: 'Email',
             })}
             name="email"

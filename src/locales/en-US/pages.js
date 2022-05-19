@@ -86,4 +86,16 @@ export default {
   'pages.studentTable.email': 'Email',
   'pages.studentTable.editStudent': 'Edit Student',
   'pages.studentTable.newStudent': 'New Student',
+
+  'pages.teacherTable.id': 'ID',
+  'pages.teacherTable.firstName': 'First name',
+  'pages.teacherTable.middleName': 'Middle name',
+  'pages.teacherTable.lastName': 'Last name',
+  'pages.teacherTable.address': 'Address',
+  'pages.teacherTable.birthday': 'Birthday',
+  'pages.teacherTable.gender': 'Gender',
+  'pages.teacherTable.phoneNumber': 'Phone number',
+  'pages.teacherTable.email': 'Email',
+  'pages.teacherTable.editTeacher': 'Edit Teacher',
+  'pages.teacherTable.newTeacher': 'New Teacher',
 };
