@@ -49,6 +49,12 @@ export default [
     component: './StudentList',
   },
   {
+    name: 'list.teacher-list',
+    icon: 'table',
+    path: '/teachers',
+    component: './TeacherList',
+  },
+  {
     path: '/',
     redirect: '/welcome',
   },
