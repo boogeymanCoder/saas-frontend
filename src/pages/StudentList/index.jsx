@@ -4,11 +4,17 @@ import React, { useState, useRef } from 'react';
 import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
-import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
+import {
+  ModalForm,
+  ProFormDatePicker,
+  ProFormSelect,
+  ProFormText,
+  ProFormTextArea,
+} from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import UpdateForm from './components/UpdateForm';
 import { rule, addRule, updateRule, removeRule } from '@/services/ant-design-pro/api';
-import { student } from '@/services/students';
+import { addStudent, student } from '@/services/students';
 /**
  * @en-US Add node
  * @zh-CN 添加节点
@@ -17,13 +23,15 @@ import { student } from '@/services/students';
 
 const handleAdd = async (fields) => {
   const hide = message.loading('正在添加');
+  console.log({ fields });
 
   try {
-    await addRule({ ...fields });
+    await addStudent({ ...fields });
     hide();
     message.success('Added successfully');
     return true;
   } catch (error) {
+    console.log({ error });
     hide();
     message.error('Adding failed, please try again!');
     return false;
@@ -307,8 +315,8 @@ const TableList = () => {
       )}
       <ModalForm
         title={intl.formatMessage({
-          id: 'pages.searchTable.createForm.newRule',
-          defaultMessage: 'New rule',
+          id: 'pages.studentTable.newStudent',
+          defaultMessage: 'New Student',
         })}
         width="400px"
         visible={createModalVisible}
@@ -329,18 +337,98 @@ const TableList = () => {
           rules={[
             {
               required: true,
-              message: (
-                <FormattedMessage
-                  id="pages.searchTable.ruleName"
-                  defaultMessage="Rule name is required"
-                />
-              ),
             },
           ]}
-          width="md"
-          name="name"
+          label={intl.formatMessage({
+            id: 'pages.studentTable.firstName',
+            defaultMessage: 'First name',
+          })}
+          name="first_name"
         />
-        <ProFormTextArea width="md" name="desc" />
+        <ProFormText
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+          label={intl.formatMessage({
+            id: 'pages.studentTable.middleName',
+            defaultMessage: 'Middle name',
+          })}
+          name="middle_name"
+        />
+        <ProFormText
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+          label={intl.formatMessage({
+            id: 'pages.studentTable.lastName',
+            defaultMessage: 'Last name',
+          })}
+          name="last_name"
+        />
+        <ProFormTextArea
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+          label={intl.formatMessage({
+            id: 'pages.studentTable.address',
+            defaultMessage: 'Address',
+          })}
+          name="address"
+        />
+        <ProFormDatePicker
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+          label={intl.formatMessage({
+            id: 'pages.studentTable.birthday',
+            defaultMessage: 'Birthday',
+          })}
+          name="birthday"
+        />
+        <ProFormSelect
+          rules={[{ required: true }]}
+          label={intl.formatMessage({
+            id: 'pages.studentTable.gender',
+            defaultMessage: 'Gender',
+          })}
+          name="gender"
+          valueEnum={{
+            Male: 'Male',
+            Female: 'Female',
+          }}
+        />
+        <ProFormText
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+          label={intl.formatMessage({
+            id: 'pages.studentTable.phoneNumber',
+            defaultMessage: 'Phone number',
+          })}
+          name="number"
+        />
+        <ProFormText
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+          label={intl.formatMessage({
+            id: 'pages.studentTable.email',
+            defaultMessage: 'Email',
+          })}
+          name="email"
+        />
       </ModalForm>
       <UpdateForm
         onSubmit={async (value) => {

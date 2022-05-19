@@ -23,14 +23,16 @@ export async function student(params, options) {
 //     ...(options || {}),
 //   });
 // }
-// /** 新建规则 POST /api/rule */
+/** 新建规则 POST /api/rule */
 
-// export async function addRule(options) {
-//   return request('/api/rule', {
-//     method: 'POST',
-//     ...(options || {}),
-//   });
-// }
+export async function addStudent(params, options) {
+  const user = await currentUser();
+  return request(`http://${user.tenant.id}.${HOST_NAME}/api/students`, {
+    method: 'POST',
+    params,
+    ...(options || {}),
+  });
+}
 // /** 删除规则 DELETE /api/rule */
 
 // export async function removeRule(options) {
