@@ -66,15 +66,17 @@ const handleUpdate = async (id, fields) => {
 const handleRemove = async (selectedRows) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
+  var deletedAll = true;
 
   try {
-    // await removeRule({
-    //   key: selectedRows.map((row) => row.key),
-    // });
-    selectedRows.map(async (teacher) => await removeTeacher(teacher.id));
+    selectedRows.map((teacher) => {
+      removeTeacher(teacher.id).then(() =>
+        message.success('Deleted successfully and will refresh soon'),
+      );
+    });
     hide();
-    message.success('Deleted successfully and will refresh soon');
-    return true;
+    console.log({ deletedAll });
+    return deletedAll;
   } catch (error) {
     hide();
     message.error('Delete failed, please try again');
@@ -278,11 +280,11 @@ const TableList = () => {
           return teacher(parameters);
         }}
         columns={columns}
-        rowSelection={{
-          onChange: (_, selectedRows) => {
-            setSelectedRows(selectedRows);
-          },
-        }}
+        // rowSelection={{
+        //   onChange: (_, selectedRows) => {
+        //     setSelectedRows(selectedRows);
+        //   },
+        // }}
       />
       {selectedRowsState?.length > 0 && (
         <FooterToolbar
