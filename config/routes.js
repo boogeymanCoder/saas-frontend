@@ -56,13 +56,27 @@ export default [
   {
     name: 'list.subject-list',
     icon: 'table',
+    path: '/subjects/:id',
+    hideInMenu: true,
+    component: './SubjectList',
+  },
+  {
+    name: 'list.subject-list',
+    icon: 'table',
     path: '/subjects',
     component: './SubjectList',
   },
   {
     name: 'list.teacher-list',
     icon: 'table',
-    path: '/teachers',
+    path: '/teachers/:id',
+    hideInMenu: true,
+    component: './TeacherList',
+  },
+  {
+    name: 'list.teacher-list',
+    icon: 'table',
+    path: '/teachers/',
     component: './TeacherList',
   },
   {
