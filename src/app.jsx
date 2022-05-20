@@ -6,8 +6,10 @@ import Footer from '@/components/Footer';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
+import { getDomain } from './services/helpers';
 const isDev = process.env.NODE_ENV === 'development';
-const loginPath = '/user/login';
+const isCentralDomain = getDomain() === APP_HOST_NAME;
+const loginPath = isCentralDomain ? '/user/register' : '/user/login';
 /** 获取用户信息比较慢的时候会展示一个 loading */
 
 export const initialStateConfig = {
