@@ -63,7 +63,7 @@ export default [
   {
     name: 'list.subject-list',
     icon: 'table',
-    path: '/subjects/:id',
+    path: '/subjects/id/:id',
     hideInMenu: true,
     component: './SubjectList',
   },
@@ -76,7 +76,7 @@ export default [
   {
     name: 'list.teacher-list',
     icon: 'table',
-    path: '/teachers/:id',
+    path: '/teachers/id/:id',
     hideInMenu: true,
     component: './TeacherList',
   },

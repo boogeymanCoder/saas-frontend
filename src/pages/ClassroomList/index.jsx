@@ -164,7 +164,7 @@ const TableList = () => {
       dataIndex: 'teacher',
       render: (dom) => (
         <a
-          href={`/teachers/${dom.id}`}
+          href={`/teachers/id/${dom.id}`}
         >{`${dom.first_name} ${dom.middle_name} ${dom.last_name}`}</a>
       ),
       width: 100,
@@ -184,7 +184,7 @@ const TableList = () => {
     {
       title: <FormattedMessage id="pages.classroomTable.subject" defaultMessage="Subject" />,
       dataIndex: 'subject',
-      render: (dom) => <a href={`/subjects/${dom.id}`}>{dom.name}</a>,
+      render: (dom) => <a href={`/subjects/id/${dom.id}`}>{dom.name}</a>,
       width: 100,
       search: false,
     },
