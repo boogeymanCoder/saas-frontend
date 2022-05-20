@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, message, Input, Drawer, Popconfirm } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage, useParams } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import {
@@ -12,7 +12,15 @@ import {
   ProFormTextArea,
 } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
-import { addClassroom, classroom, removeClassroom, updateClassroom } from '@/services/classroom';
+import {
+  addClassroom,
+  classroom,
+  findClassroomByStudent,
+  findClassroomBySubject,
+  findClassroomByTeacher,
+  removeClassroom,
+  updateClassroom,
+} from '@/services/classroom';
 import { teacher } from '@/services/teacher';
 import TeacherSelector, { fetchTeachers } from '@/components/Selector/TeacherSelector';
 import SubjectSelector, { fetchSubjects } from '@/components/Selector/SubjectSelector';
@@ -91,6 +99,8 @@ const TableList = () => {
    * @en-US Pop-up window of new window
    * @zh-CN 新建窗口的弹窗
    *  */
+  const pageParams = useParams();
+  console.log({ pageParams });
   const [createModalVisible, handleModalVisible] = useState(false);
   /**
    * @en-US The pop-up window of the distribution update window
@@ -164,7 +174,7 @@ const TableList = () => {
       dataIndex: 'teacher',
       render: (dom) => (
         <a
-          href={`/teachers/${dom.id}`}
+          href={`/teachers/id/${dom.id}`}
         >{`${dom.first_name} ${dom.middle_name} ${dom.last_name}`}</a>
       ),
       width: 100,
@@ -184,8 +194,16 @@ const TableList = () => {
     {
       title: <FormattedMessage id="pages.classroomTable.subject" defaultMessage="Subject" />,
       dataIndex: 'subject',
-      render: (dom) => <a href={`/subjects/${dom.id}`}>{dom.name}</a>,
+      render: (dom) => <a href={`/subjects/id/${dom.id}`}>{dom.name}</a>,
       width: 100,
+      search: false,
+    },
+    {
+      title: <FormattedMessage id="pages.classroomTable.students" defaultMessage="Students" />,
+      dataIndex: 'students_count',
+      render: (dom, entity) => <a href={`/students/classroom/${entity.id}`}>{dom}</a>,
+      width: 100,
+      fixed: 'right',
       search: false,
     },
     {
@@ -271,6 +289,17 @@ const TableList = () => {
                 ? sorter[0][0]
                 : `-${sorter[0][0]}`,
           };
+
+          if (pageParams.student) {
+            return findClassroomByStudent(pageParams.student, parameters);
+          }
+          if (pageParams.subject) {
+            return findClassroomBySubject(pageParams.subject, parameters);
+          }
+          if (pageParams.teacher) {
+            return findClassroomByTeacher(pageParams.teacher, parameters);
+          }
+
           return classroom(parameters);
         }}
         columns={columns}

@@ -73,3 +73,18 @@ export async function removeStudent(id, options) {
     ...(options || {}),
   });
 }
+
+export async function findStudentByClassroom(id, params, options) {
+  const domain = getDomain();
+  const token = store.get('accessToken');
+
+  return request(`${PROTOCOL}//${domain}.${HOST_NAME}/api/classrooms/${id}/students`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    params,
+    ...(options || {}),
+  });
+}

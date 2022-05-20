@@ -86,6 +86,7 @@ export default {
   'pages.studentTable.email': 'Email',
   'pages.studentTable.editStudent': 'Edit Student',
   'pages.studentTable.newStudent': 'New Student',
+  'pages.studentTable.classrooms': 'Classrooms',
 
   'pages.teacherTable.id': 'ID',
   'pages.teacherTable.firstName': 'First name',
@@ -98,6 +99,7 @@ export default {
   'pages.teacherTable.email': 'Email',
   'pages.teacherTable.editTeacher': 'Edit Teacher',
   'pages.teacherTable.newTeacher': 'New Teacher',
+  'pages.teacherTable.classrooms': 'Classrooms',
 
   'pages.classroomTable.id': 'ID',
   'pages.classroomTable.name': 'Name',
@@ -106,6 +108,7 @@ export default {
   'pages.classroomTable.subject': 'Subject',
   'pages.classroomTable.teacherId': 'Teacher ID',
   'pages.classroomTable.subjectId': 'Subject ID',
+  'pages.classroomTable.students': 'Students',
   'pages.classroomTable.editClassroom': 'Edit Classroom',
   'pages.classroomTable.newClassroom': 'New Classroom',
 
@@ -114,6 +117,7 @@ export default {
   'pages.subjectTable.code': 'Code',
   'pages.subjectTable.editSubject': 'Edit Subject',
   'pages.subjectTable.newSubject': 'New Subject',
+  'pages.subjectTable.classrooms': 'Classrooms',
 
   'pages.login.registerAccount': 'Register Account',
   'pages.register.success': 'Register successful!',

@@ -145,6 +145,14 @@ const TableList = () => {
       width: 100,
     },
     {
+      title: <FormattedMessage id="pages.subjectTable.classrooms" defaultMessage="Classrooms" />,
+      dataIndex: 'classrooms_count',
+      render: (dom, entity) => <a href={`/classrooms/subject/${entity.id}`}>{dom}</a>,
+      width: 100,
+      fixed: 'right',
+      search: false,
+    },
+    {
       title: <FormattedMessage id="pages.table.actions" defaultMessage="Actions" />,
       dataIndex: 'option',
       valueType: 'option',

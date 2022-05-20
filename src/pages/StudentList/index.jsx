@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, message, Input, Drawer, Popconfirm } from 'antd';
 import React, { useState, useRef } from 'react';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage, useParams } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import {
@@ -13,7 +13,13 @@ import {
 } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import { rule, addRule, updateRule, removeRule } from '@/services/ant-design-pro/api';
-import { addStudent, removeStudent, student, updateStudent } from '@/services/students';
+import {
+  addStudent,
+  findStudentByClassroom,
+  removeStudent,
+  student,
+  updateStudent,
+} from '@/services/students';
 /**
  * @en-US Add node
  * @zh-CN 添加节点
@@ -89,6 +95,8 @@ const TableList = () => {
    * @en-US Pop-up window of new window
    * @zh-CN 新建窗口的弹窗
    *  */
+  const pageParams = useParams();
+  console.log({ pageParams });
   const [createModalVisible, handleModalVisible] = useState(false);
   /**
    * @en-US The pop-up window of the distribution update window
@@ -194,6 +202,14 @@ const TableList = () => {
       sorter: true,
     },
     {
+      title: <FormattedMessage id="pages.studentTable.classrooms" defaultMessage="Classrooms" />,
+      dataIndex: 'classrooms_count',
+      render: (dom, entity) => <a href={`/classrooms/student/${entity.id}`}>{dom}</a>,
+      width: 100,
+      fixed: 'right',
+      search: false,
+    },
+    {
       title: <FormattedMessage id="pages.table.actions" defaultMessage="Actions" />,
       dataIndex: 'option',
       valueType: 'option',
@@ -276,6 +292,11 @@ const TableList = () => {
                 ? sorter[0][0]
                 : `-${sorter[0][0]}`,
           };
+
+          if (pageParams.classroom) {
+            return findStudentByClassroom(pageParams.classroom, parameters);
+          }
+
           return student(parameters);
         }}
         columns={columns}
