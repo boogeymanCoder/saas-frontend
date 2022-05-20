@@ -106,6 +106,7 @@ export default {
   'pages.classroomTable.subject': 'Subject',
   'pages.classroomTable.teacherId': 'Teacher ID',
   'pages.classroomTable.subjectId': 'Subject ID',
+  'pages.classroomTable.students': 'Students',
   'pages.classroomTable.editClassroom': 'Edit Classroom',
   'pages.classroomTable.newClassroom': 'New Classroom',
 
