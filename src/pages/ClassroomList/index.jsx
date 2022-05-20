@@ -1,6 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, message, Input, Drawer, Popconfirm } from 'antd';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
@@ -13,6 +13,9 @@ import {
 } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import { addClassroom, classroom, removeClassroom, updateClassroom } from '@/services/classroom';
+import { teacher } from '@/services/teacher';
+import TeacherSelector, { fetchTeachers } from '@/components/Selector/TeacherSelector';
+import SubjectSelector, { fetchSubjects } from '@/components/Selector/SubjectSelector';
 /**
  * @en-US Add node
  * @zh-CN 添加节点
@@ -99,6 +102,10 @@ const TableList = () => {
   const actionRef = useRef();
   const [currentRow, setCurrentRow] = useState();
   const [selectedRowsState, setSelectedRows] = useState([]);
+  useEffect(() => {
+    console.log({ currentRow });
+  }, [currentRow]);
+
   /**
    * @en-US International configuration
    * @zh-CN 国际化配置
@@ -146,12 +153,36 @@ const TableList = () => {
       dataIndex: 'teacher_id',
       key: 'filter[teacher_id]',
       width: 100,
+      hideInTable: true,
+      hideInDescriptions: true,
+      request: fetchTeachers,
+      valueType: 'select',
+      fieldProps: { showSearch: true },
+    },
+    {
+      title: <FormattedMessage id="pages.classroomTable.teacher" defaultMessage="Teacher" />,
+      dataIndex: 'teacher',
+      render: (dom) => `${dom.first_name} ${dom.middle_name} ${dom.last_name}`,
+      width: 100,
+      search: false,
     },
     {
       title: <FormattedMessage id="pages.classroomTable.subject" defaultMessage="Subject" />,
       dataIndex: 'subject_id',
       key: 'filter[subject_id]',
       width: 100,
+      hideInTable: true,
+      hideInDescriptions: true,
+      request: fetchSubjects,
+      valueType: 'select',
+      fieldProps: { showSearch: true },
+    },
+    {
+      title: <FormattedMessage id="pages.classroomTable.subject" defaultMessage="Subject" />,
+      dataIndex: 'subject',
+      render: (dom) => dom.name,
+      width: 100,
+      search: false,
     },
     {
       title: <FormattedMessage id="pages.table.actions" defaultMessage="Actions" />,
@@ -335,30 +366,9 @@ const TableList = () => {
           })}
           name="code"
         />
-        <ProFormText
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-          label={intl.formatMessage({
-            id: 'pages.classroomTable.teacherId',
-            defaultMessage: 'Teacher ID',
-          })}
-          name="teacher_id"
-        />
-        <ProFormText
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-          label={intl.formatMessage({
-            id: 'pages.classroomTable.subjectId',
-            defaultMessage: 'Subject ID',
-          })}
-          name="subject_id"
-        />
+        <TeacherSelector name="teacher_id" />
+
+        <SubjectSelector name="subject_id" />
       </ModalForm>
 
       {currentRow && updateModalVisible && (
@@ -408,32 +418,10 @@ const TableList = () => {
             name="code"
             initialValue={currentRow && currentRow.code}
           />
-          <ProFormText
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-            label={intl.formatMessage({
-              id: 'pages.classroomTable.teacherId',
-              defaultMessage: 'Teacher ID',
-            })}
-            name="teacher_id"
-            initialValue={currentRow && currentRow.teacher_id}
-          />
-          <ProFormText
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-            label={intl.formatMessage({
-              id: 'pages.classroomTable.subjectId',
-              defaultMessage: 'Subject ID',
-            })}
-            name="subject_id"
-            initialValue={currentRow && currentRow.subject_id}
-          />
+
+          <TeacherSelector name="teacher_id" currentRow={currentRow} />
+
+          <SubjectSelector name="subject_id" currentRow={currentRow} />
         </ModalForm>
       )}
 
