@@ -292,6 +292,10 @@ const TableList = () => {
           if (pageParams.student) {
             return findClassroomByStudent(pageParams.student, parameters);
           }
+          if (pageParams.subject) {
+            return findClassroomBySubject(pageParams.subject, parameters);
+          }
+
           return classroom(parameters);
         }}
         columns={columns}
