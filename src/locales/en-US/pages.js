@@ -114,4 +114,16 @@ export default {
   'pages.subjectTable.code': 'Code',
   'pages.subjectTable.editSubject': 'Edit Subject',
   'pages.subjectTable.newSubject': 'New Subject',
+
+  'pages.login.registerAccount': 'Register Account',
+  'pages.register.success': 'Register successful!',
+  'pages.login.register': 'Register',
+  'pages.login.login': 'Login',
+  'pages.login.email': 'Email',
+  'pages.login.password': 'Password',
+  'pages.register.name': 'Name',
+  'pages.register.email': 'Email',
+  'pages.register.password': 'Password',
+  'pages.register.passwordConfirmation': 'Password Confirmation',
+  'pages.register.domain': 'Domain',
 };

@@ -11,6 +11,7 @@ export default defineConfig({
     HOST_NAME: process.env.HOST_NAME,
     PROTOCOL: process.env.PROTOCOL,
     PORT: process.env.PORT,
+    APP_HOST_NAME: process.env.APP_HOST_NAME,
   },
   hash: true,
   antd: {},

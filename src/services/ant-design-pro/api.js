@@ -16,6 +16,7 @@ export async function currentUser(options) {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
+    skipErrorHandler: true,
     ...(options || {}),
   });
 }
@@ -34,6 +35,21 @@ export async function outLogin(options) {
     ...(options || {}),
   });
 }
+/** 登录接口 POST /api/login/account */
+
+export async function register(body, options) {
+  const domain = getDomain();
+
+  return request(`${API_URL}/api/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** 登录接口 POST /api/login/account */
 
 export async function login(body, options) {
