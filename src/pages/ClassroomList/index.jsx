@@ -162,7 +162,11 @@ const TableList = () => {
     {
       title: <FormattedMessage id="pages.classroomTable.teacher" defaultMessage="Teacher" />,
       dataIndex: 'teacher',
-      render: (dom) => `${dom.first_name} ${dom.middle_name} ${dom.last_name}`,
+      render: (dom) => (
+        <a
+          href={`/teachers/${dom.id}`}
+        >{`${dom.first_name} ${dom.middle_name} ${dom.last_name}`}</a>
+      ),
       width: 100,
       search: false,
     },
@@ -180,7 +184,7 @@ const TableList = () => {
     {
       title: <FormattedMessage id="pages.classroomTable.subject" defaultMessage="Subject" />,
       dataIndex: 'subject',
-      render: (dom) => dom.name,
+      render: (dom) => <a href={`/subjects/${dom.id}`}>{dom.name}</a>,
       width: 100,
       search: false,
     },

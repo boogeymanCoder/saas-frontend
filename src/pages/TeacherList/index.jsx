@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, message, Input, Drawer, Popconfirm } from 'antd';
 import React, { useState, useRef } from 'react';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage, useParams } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import {
@@ -96,6 +96,8 @@ const TableList = () => {
    * @zh-CN 分布更新窗口的弹窗
    * */
 
+  const pageParams = useParams();
+  console.log({ pageParams });
   const [updateModalVisible, handleUpdateModalVisible] = useState(false);
   const [showDetail, setShowDetail] = useState(false);
   const actionRef = useRef();
@@ -270,6 +272,7 @@ const TableList = () => {
             ...params,
             'page[number]': params.current,
             'page[size]': params.pageSize,
+            'filter[id]': pageParams.id,
             sort:
               sorter.length === 0
                 ? undefined
