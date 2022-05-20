@@ -86,6 +86,7 @@ export default {
   'pages.studentTable.email': 'Email',
   'pages.studentTable.editStudent': 'Edit Student',
   'pages.studentTable.newStudent': 'New Student',
+  'pages.studentTable.classrooms': 'Classrooms',
 
   'pages.teacherTable.id': 'ID',
   'pages.teacherTable.firstName': 'First name',

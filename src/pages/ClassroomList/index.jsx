@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, message, Input, Drawer, Popconfirm } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage, useParams } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import {
@@ -12,7 +12,14 @@ import {
   ProFormTextArea,
 } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
-import { addClassroom, classroom, removeClassroom, updateClassroom } from '@/services/classroom';
+import {
+  addClassroom,
+  classroom,
+  findClassroomByStudent,
+  findClassroomBySubject,
+  removeClassroom,
+  updateClassroom,
+} from '@/services/classroom';
 import { teacher } from '@/services/teacher';
 import TeacherSelector, { fetchTeachers } from '@/components/Selector/TeacherSelector';
 import SubjectSelector, { fetchSubjects } from '@/components/Selector/SubjectSelector';
@@ -91,6 +98,8 @@ const TableList = () => {
    * @en-US Pop-up window of new window
    * @zh-CN 新建窗口的弹窗
    *  */
+  const pageParams = useParams();
+  console.log({ pageParams });
   const [createModalVisible, handleModalVisible] = useState(false);
   /**
    * @en-US The pop-up window of the distribution update window
@@ -193,6 +202,7 @@ const TableList = () => {
       dataIndex: 'students_count',
       render: (dom, entity) => <a href={`/students/classroom/${entity.id}`}>{dom}</a>,
       width: 100,
+      fixed: 'right',
       search: false,
     },
     {
@@ -278,6 +288,10 @@ const TableList = () => {
                 ? sorter[0][0]
                 : `-${sorter[0][0]}`,
           };
+
+          if (pageParams.student) {
+            return findClassroomByStudent(pageParams.student, parameters);
+          }
           return classroom(parameters);
         }}
         columns={columns}

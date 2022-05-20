@@ -48,6 +48,13 @@ export default [
     component: './ClassroomList',
   },
   {
+    name: 'list.classroom-list',
+    icon: 'table',
+    path: '/classrooms/student/:student',
+    hideInMenu: true,
+    component: './ClassroomList',
+  },
+  {
     name: 'list.student-list',
     icon: 'table',
     path: '/students',
