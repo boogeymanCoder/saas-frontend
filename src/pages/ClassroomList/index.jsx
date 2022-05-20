@@ -17,6 +17,7 @@ import {
   classroom,
   findClassroomByStudent,
   findClassroomBySubject,
+  findClassroomByTeacher,
   removeClassroom,
   updateClassroom,
 } from '@/services/classroom';
@@ -294,6 +295,9 @@ const TableList = () => {
           }
           if (pageParams.subject) {
             return findClassroomBySubject(pageParams.subject, parameters);
+          }
+          if (pageParams.teacher) {
+            return findClassroomByTeacher(pageParams.teacher, parameters);
           }
 
           return classroom(parameters);

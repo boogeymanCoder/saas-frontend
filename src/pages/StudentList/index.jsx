@@ -202,7 +202,7 @@ const TableList = () => {
       sorter: true,
     },
     {
-      title: <FormattedMessage id="pages.studentTable.classrooms" defaultMessage="classrooms" />,
+      title: <FormattedMessage id="pages.studentTable.classrooms" defaultMessage="Classrooms" />,
       dataIndex: 'classrooms_count',
       render: (dom, entity) => <a href={`/classrooms/student/${entity.id}`}>{dom}</a>,
       width: 100,

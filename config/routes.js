@@ -62,6 +62,13 @@ export default [
     component: './ClassroomList',
   },
   {
+    name: 'list.classroom-list',
+    icon: 'table',
+    path: '/classrooms/teacher/:teacher',
+    hideInMenu: true,
+    component: './ClassroomList',
+  },
+  {
     name: 'list.student-list',
     icon: 'table',
     path: '/students',

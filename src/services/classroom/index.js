@@ -104,3 +104,18 @@ export async function findClassroomBySubject(id, params, options) {
     ...(options || {}),
   });
 }
+
+export async function findClassroomByTeacher(id, params, options) {
+  const domain = getDomain();
+  const token = store.get('accessToken');
+
+  return request(`${PROTOCOL}//${domain}.${HOST_NAME}/api/teachers/${id}/classrooms`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    params,
+    ...(options || {}),
+  });
+}
