@@ -3,7 +3,11 @@ import { PageLoading } from '@ant-design/pro-layout';
 import { history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
-import { checkDomain, currentUser as queryCurrentUser } from './services/ant-design-pro/api';
+import {
+  checkDomain,
+  currentUser as queryCurrentUser,
+  updateSettings,
+} from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
 import { getDomain } from './services/helpers';
@@ -33,18 +37,46 @@ export async function getInitialState() {
     return undefined;
   }; // 如果不是登录页面，执行
 
-  if (history.location.pathname !== loginPath) {
-    const currentUser = await fetchUserInfo();
-    return {
-      fetchUserInfo,
-      currentUser,
-      settings: defaultSettings,
-    };
+  const currentUser = await fetchUserInfo();
+  var settingsToSet = defaultSettings;
+  try {
+    console.log({ currentUser });
+    if (currentUser) {
+      const userSettings = JSON.parse(currentUser?.settings);
+      settingsToSet = userSettings;
+
+      console.log('settingsToSet from user:', { settingsToSet });
+    }
+  } catch (err) {
+    console.log({ err });
   }
 
+  if (history.location.pathname !== loginPath) {
+    console.log({ history });
+    // if (currentUser.settings) {
+    //   const userSettings = JSON.parse(currentUser?.settings);
+    //   settingsToSet = userSettings;
+
+    //   console.log('settingsToSet from user:', { settingsToSet });
+    // }
+
+    // console.log('currentUser before initial state:', { currentUser });
+    // console.log('settingsToSet before initial state:', { settingsToSet });
+
+    console.log('has user before returning initial state:', { settingsToSet });
+    const state = {
+      fetchUserInfo,
+      currentUser,
+      settings: settingsToSet,
+    };
+    console.log({ state });
+    return state;
+  }
+
+  console.log('no user before returning initial state:', { settingsToSet });
   return {
     fetchUserInfo,
-    settings: defaultSettings,
+    settings: settingsToSet,
   };
 } // ProLayout 支持的api https://procomponents.ant.design/components/layout
 
@@ -77,6 +109,8 @@ export const layout = ({ initialState, setInitialState }) => {
     // unAccessible: <div>unAccessible</div>,
     // 增加一个 loading 的状态
     childrenRender: (children, props) => {
+      console.log('settings drawer:', { initialState });
+
       useEffect(async () => {
         try {
           const domain = getDomain();
@@ -94,14 +128,27 @@ export const layout = ({ initialState, setInitialState }) => {
       return (
         <>
           {children}
+          {/* {console.log('before drawer:', { initialState })} */}
           {!props.location?.pathname?.includes('/login') && (
             <SettingDrawer
               disableUrlParams
               enableDarkTheme
               settings={initialState?.settings}
-              onSettingChange={(settings) => {
-                setInitialState((preInitialState) => ({ ...preInitialState, settings }));
+              onSettingChange={async (settings) => {
+                // console.log('before onSettingChange:', initialState);
+                setInitialState((preInitialState) => {
+                  if (!isCentralDomain) {
+                    console.log('user changed settings');
+                    const settingsParam = { settings: JSON.stringify(settings) };
+                    console.log({ settingsParam });
+
+                    updateSettings(settingsParam);
+                  }
+                  return { ...preInitialState, settings };
+                });
               }}
+              hideCopyButton
+              hideHintAlert
             />
           )}
         </>
