@@ -144,6 +144,10 @@ const TableList = () => {
   const [createModalVisible, handleModalVisible] = useState(false);
   const [addModalVisible, handleAddModalVisible] = useState(false);
   const [removeModalVisible, handleRemoveModalVisible] = useState(false);
+  const createFormRef = useRef();
+  const updateFormRef = useRef();
+  const removeFormRef = useRef();
+  const addFormRef = useRef();
   /**
    * @en-US The pop-up window of the distribution update window
    * @zh-CN 分布更新窗口的弹窗
@@ -427,11 +431,13 @@ const TableList = () => {
         })}
         width="400px"
         visible={addModalVisible}
+        formRef={addFormRef}
         onVisibleChange={handleAddModalVisible}
         onFinish={async (value) => {
           const success = await handleAddStudent(currentRow.id, value.student_id);
 
           if (success) {
+            addFormRef.current.resetFields();
             handleAddModalVisible(false);
 
             if (actionRef.current) {
@@ -449,6 +455,7 @@ const TableList = () => {
             id: 'pages.classroomTable.removeStudent',
             defaultMessage: 'Remove Student',
           })}
+          formRef={removeFormRef}
           width="400px"
           visible={removeModalVisible}
           onVisibleChange={handleRemoveModalVisible}
@@ -456,6 +463,7 @@ const TableList = () => {
             const success = await handleRemoveStudent(currentRow.id, value.student_id);
 
             if (success) {
+              removeFormRef.current.resetFields();
               handleRemoveModalVisible(false);
 
               if (actionRef.current) {
@@ -470,16 +478,19 @@ const TableList = () => {
 
       <ModalForm
         title={intl.formatMessage({
-          id: 'pages.studentTable.newStudent',
-          defaultMessage: 'New Student',
+          id: 'pages.classroomTable.newClassroom',
+          defaultMessage: 'New Classroom',
         })}
         width="400px"
         visible={createModalVisible}
+        formRef={createFormRef}
         onVisibleChange={handleModalVisible}
         onFinish={async (value) => {
           const success = await handleAdd(value);
 
           if (success) {
+            createFormRef.current.resetFields();
+
             handleModalVisible(false);
 
             if (actionRef.current) {
@@ -525,7 +536,11 @@ const TableList = () => {
           })}
           width="400px"
           visible={updateModalVisible}
-          onVisibleChange={handleUpdateModalVisible}
+          formRef={updateFormRef}
+          onVisibleChange={(visible) => {
+            handleUpdateModalVisible(visible);
+            updateFormRef.current.resetFields();
+          }}
           onFinish={async (value) => {
             const success = await handleUpdate(currentRow.id, value);
 
