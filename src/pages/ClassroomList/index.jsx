@@ -72,12 +72,12 @@ const handleRemoveStudent = async (id, studentId) => {
   try {
     await removeClassroomStudent(id, studentId);
     hide();
-    message.success('Added successfully');
+    message.success('Removed successfully');
     return true;
   } catch (error) {
     console.log({ error });
     hide();
-    message.error('Adding failed, please try again!');
+    message.error('Remove failed, please try again!');
     return false;
   }
 };
