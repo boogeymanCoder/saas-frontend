@@ -49,4 +49,9 @@ export default {
   'menu.editor.flow': 'ویرایشگر جریان',
   'menu.editor.mind': 'ویرایشگر ذهن',
   'menu.editor.koni': 'ویرایشگر Koni',
+
+  'menu.list.student-list': 'میز دانش آموز',
+  'menu.list.teacher-list': 'میز معلم',
+  'menu.list.classroom-list': 'میز کلاس درس',
+  'menu.list.subject-list': 'جدول موضوع',
 };

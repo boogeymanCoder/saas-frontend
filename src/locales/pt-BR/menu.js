@@ -49,4 +49,9 @@ export default {
   'menu.editor.flow': 'Flow Editor',
   'menu.editor.mind': 'Mind Editor',
   'menu.editor.koni': 'Koni Editor',
+
+  'menu.list.student-list': 'Tabela de estudantes',
+  'menu.list.teacher-list': 'Tabela de professores',
+  'menu.list.classroom-list': 'Mesa da sala de aula',
+  'menu.list.subject-list': 'Tabela de assunto',
 };

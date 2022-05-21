@@ -49,4 +49,9 @@ export default {
   'menu.editor.flow': 'Penyusun Alur',
   'menu.editor.mind': 'Penyusun Mind',
   'menu.editor.koni': 'Penyusun Koni',
+
+  'menu.list.student-list': 'Meja Siswa',
+  'menu.list.teacher-list': 'Meja Guru',
+  'menu.list.classroom-list': 'Meja kelas',
+  'menu.list.subject-list': 'Tabel subjek',
 };
