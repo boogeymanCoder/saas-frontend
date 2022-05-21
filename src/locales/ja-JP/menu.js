@@ -49,4 +49,9 @@ export default {
   'menu.editor.flow': 'フローエディタ',
   'menu.editor.mind': 'マインドエディター',
   'menu.editor.koni': 'コニエディター',
+
+  'menu.list.student-list': '学生テーブル',
+  'menu.list.teacher-list': '先生のテーブル',
+  'menu.list.classroom-list': '教室のテーブル',
+  'menu.list.subject-list': '件名テーブル',
 };

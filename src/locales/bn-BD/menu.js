@@ -49,4 +49,9 @@ export default {
   'menu.editor.flow': 'ফ্লো এডিটর',
   'menu.editor.mind': 'মাইন্ড এডিটর',
   'menu.editor.koni': 'কোনি সম্পাদক',
+
+  'menu.list.student-list': 'ছাত্র টেবিল',
+  'menu.list.teacher-list': 'শিক্ষক টেবিল',
+  'menu.list.classroom-list': 'ক্লাসরুম টেবিল',
+  'menu.list.subject-list': 'বিষয় সারণী',
 };

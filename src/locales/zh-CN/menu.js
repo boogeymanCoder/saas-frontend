@@ -49,4 +49,9 @@ export default {
   'menu.editor.flow': '流程编辑器',
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
+
+  'menu.list.student-list': '学生桌',
+  'menu.list.teacher-list': '老师表',
+  'menu.list.classroom-list': '课堂桌',
+  'menu.list.subject-list': '主题表',
 };
