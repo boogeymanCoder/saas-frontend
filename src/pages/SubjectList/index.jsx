@@ -399,7 +399,7 @@ const TableList = () => {
         {currentRow && (
           <ProDescriptions
             column={1}
-            title={`${currentRow?.first_name} ${currentRow?.middle_name} ${currentRow?.last_name}`}
+            title={`${currentRow?.name} [${currentRow?.code}]`}
             request={async () => ({
               data: currentRow || {},
             })}
