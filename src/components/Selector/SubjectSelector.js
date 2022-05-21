@@ -42,6 +42,7 @@ export default function SubjectSelector({ currentRow, ...props }) {
         id: 'pages.classroomTable.subject',
         defaultMessage: 'Subject',
       })}
+      defaultActiveFirstOption={currentRow}
       showSearch
       initialValue={currentRow && currentRow?.subject?.id}
       request={(params) => fetchSubjects(params, currentRow)}

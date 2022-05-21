@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Input, Drawer, Popconfirm } from 'antd';
+import { Button, message, Input, Drawer, Popconfirm, Tooltip } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, useParams } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
@@ -14,16 +14,19 @@ import {
 import ProDescriptions from '@ant-design/pro-descriptions';
 import {
   addClassroom,
+  addClassroomStudent,
   classroom,
   findClassroomByStudent,
   findClassroomBySubject,
   findClassroomByTeacher,
   removeClassroom,
+  removeClassroomStudent,
   updateClassroom,
 } from '@/services/classroom';
 import { teacher } from '@/services/teacher';
 import TeacherSelector, { fetchTeachers } from '@/components/Selector/TeacherSelector';
 import SubjectSelector, { fetchSubjects } from '@/components/Selector/SubjectSelector';
+import StudentSelector from '@/components/Selector/StudentSelector';
 /**
  * @en-US Add node
  * @zh-CN 添加节点
@@ -46,6 +49,39 @@ const handleAdd = async (fields) => {
     return false;
   }
 };
+
+const handleAddStudent = async (id, studentId) => {
+  const hide = message.loading('Loading');
+
+  try {
+    await addClassroomStudent(id, studentId);
+    hide();
+    message.success('Added successfully');
+    return true;
+  } catch (error) {
+    console.log({ error });
+    hide();
+    message.error('Adding failed, please try again!');
+    return false;
+  }
+};
+
+const handleRemoveStudent = async (id, studentId) => {
+  const hide = message.loading('Loading');
+
+  try {
+    await removeClassroomStudent(id, studentId);
+    hide();
+    message.success('Added successfully');
+    return true;
+  } catch (error) {
+    console.log({ error });
+    hide();
+    message.error('Adding failed, please try again!');
+    return false;
+  }
+};
+
 /**
  * @en-US Update node
  * @zh-CN 更新节点
@@ -106,6 +142,8 @@ const TableList = () => {
   const pageParams = useParams();
   console.log({ pageParams });
   const [createModalVisible, handleModalVisible] = useState(false);
+  const [addModalVisible, handleAddModalVisible] = useState(false);
+  const [removeModalVisible, handleRemoveModalVisible] = useState(false);
   /**
    * @en-US The pop-up window of the distribution update window
    * @zh-CN 分布更新窗口的弹窗
@@ -217,6 +255,38 @@ const TableList = () => {
       width: 100,
       fixed: 'right',
       render: (_, record) => [
+        <Tooltip
+          key="remove"
+          title={intl.formatMessage({
+            id: 'pages.classroomTable.removeStudent',
+            defaultMessage: 'Remove Student',
+          })}
+        >
+          <a
+            onClick={() => {
+              handleRemoveModalVisible(true);
+              setCurrentRow(record);
+            }}
+          >
+            <FormattedMessage id="pages.classroomTable.remove" defaultMessage="Remove" />
+          </a>
+        </Tooltip>,
+        <Tooltip
+          key="add"
+          title={intl.formatMessage({
+            id: 'pages.classroomTable.removeStudent',
+            defaultMessage: 'Remove Student',
+          })}
+        >
+          <a
+            onClick={() => {
+              handleAddModalVisible(true);
+              setCurrentRow(record);
+            }}
+          >
+            <FormattedMessage id="pages.classroomTable.add" defaultMessage="Add" />
+          </a>
+        </Tooltip>,
         <a
           key="edit"
           onClick={() => {
@@ -350,6 +420,54 @@ const TableList = () => {
           </Popconfirm>
         </FooterToolbar>
       )}
+      <ModalForm
+        title={intl.formatMessage({
+          id: 'pages.classroomTable.addStudent',
+          defaultMessage: 'Add Student',
+        })}
+        width="400px"
+        visible={addModalVisible}
+        onVisibleChange={handleAddModalVisible}
+        onFinish={async (value) => {
+          const success = await handleAddStudent(currentRow.id, value.student_id);
+
+          if (success) {
+            handleAddModalVisible(false);
+
+            if (actionRef.current) {
+              actionRef.current.reload();
+            }
+          }
+        }}
+      >
+        <StudentSelector name="student_id" />
+      </ModalForm>
+
+      {currentRow && (
+        <ModalForm
+          title={intl.formatMessage({
+            id: 'pages.classroomTable.removeStudent',
+            defaultMessage: 'Remove Student',
+          })}
+          width="400px"
+          visible={removeModalVisible}
+          onVisibleChange={handleRemoveModalVisible}
+          onFinish={async (value) => {
+            const success = await handleRemoveStudent(currentRow.id, value.student_id);
+
+            if (success) {
+              handleRemoveModalVisible(false);
+
+              if (actionRef.current) {
+                actionRef.current.reload();
+              }
+            }
+          }}
+        >
+          <StudentSelector name="student_id" classroomId={currentRow.id} />
+        </ModalForm>
+      )}
+
       <ModalForm
         title={intl.formatMessage({
           id: 'pages.studentTable.newStudent',

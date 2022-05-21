@@ -5,7 +5,7 @@ import { useIntl } from 'umi';
 
 export const fetchTeachers = async (params, currentRow) => {
   try {
-    const { data } = await teacher({ 'filter[name]': params.keyWords, 'page[size]': 1000 });
+    const { data } = await teacher({ 'filter[full_name]': params.keyWords, 'page[size]': 1000 });
     console.log({ data });
 
     const options = data.map((value) => {
@@ -42,6 +42,7 @@ export default function TeacherSelector({ currentRow, ...props }) {
         id: 'pages.classroomTable.teacher',
         defaultMessage: 'Teacher',
       })}
+      defaultActiveFirstOption={currentRow}
       showSearch
       initialValue={currentRow && currentRow?.teacher?.id}
       request={(params) => fetchTeachers(params, currentRow)}

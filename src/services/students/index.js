@@ -77,6 +77,7 @@ export async function removeStudent(id, options) {
 export async function findStudentByClassroom(id, params, options) {
   const domain = getDomain();
   const token = store.get('accessToken');
+  console.log({ id, params, options });
 
   return request(`${PROTOCOL}//${domain}.${HOST_NAME}/api/classrooms/${id}/students`, {
     method: 'GET',

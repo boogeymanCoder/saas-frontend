@@ -131,4 +131,12 @@ export default {
   'pages.register.password': 'Password',
   'pages.register.passwordConfirmation': 'Password Confirmation',
   'pages.register.domain': 'Domain',
+
+  // new
+  'pages.classroomTable.add': 'Add',
+  'pages.classroomTable.addStudent': 'Add Student',
+  'pages.classroomTable.remove': 'Remove',
+  'pages.classroomTable.removeStudent': 'Remove Student',
+  'pages.welcome.message': 'Welcome to Student Management System Admin',
+  'pages.classroomTable.student': 'Student',
 };
