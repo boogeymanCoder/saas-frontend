@@ -145,6 +145,7 @@ const TableList = () => {
   const [addModalVisible, handleAddModalVisible] = useState(false);
   const [removeModalVisible, handleRemoveModalVisible] = useState(false);
   const createFormRef = useRef();
+  const updateFormRef = useRef();
   /**
    * @en-US The pop-up window of the distribution update window
    * @zh-CN 分布更新窗口的弹窗
@@ -529,7 +530,11 @@ const TableList = () => {
           })}
           width="400px"
           visible={updateModalVisible}
-          onVisibleChange={handleUpdateModalVisible}
+          formRef={updateFormRef}
+          onVisibleChange={(visible) => {
+            handleUpdateModalVisible(visible);
+            updateFormRef.current.resetFields();
+          }}
           onFinish={async (value) => {
             const success = await handleUpdate(currentRow.id, value);
 
