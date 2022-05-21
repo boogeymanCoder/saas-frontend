@@ -147,6 +147,7 @@ const TableList = () => {
   const createFormRef = useRef();
   const updateFormRef = useRef();
   const removeFormRef = useRef();
+  const addFormRef = useRef();
   /**
    * @en-US The pop-up window of the distribution update window
    * @zh-CN 分布更新窗口的弹窗
@@ -430,11 +431,13 @@ const TableList = () => {
         })}
         width="400px"
         visible={addModalVisible}
+        formRef={addFormRef}
         onVisibleChange={handleAddModalVisible}
         onFinish={async (value) => {
           const success = await handleAddStudent(currentRow.id, value.student_id);
 
           if (success) {
+            addFormRef.current.resetFields();
             handleAddModalVisible(false);
 
             if (actionRef.current) {
