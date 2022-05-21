@@ -290,8 +290,8 @@ const TableList = () => {
       )}
       <ModalForm
         title={intl.formatMessage({
-          id: 'pages.studentTable.newStudent',
-          defaultMessage: 'New Student',
+          id: 'pages.subjectTable.newSubject',
+          defaultMessage: 'New Subject',
         })}
         width="400px"
         formRef={createFormRef}
