@@ -139,4 +139,10 @@ export default {
   'pages.classroomTable.removeStudent': 'Remove Student',
   'pages.welcome.message': 'Welcome to Student Management System Admin',
   'pages.classroomTable.student': 'Student',
+
+  'pages.tenant.name': 'Name',
+  'pages.tenant.email': 'Email',
+  'pages.tenant.oldPassword': 'Old Password',
+  'pages.tenant.newPassword': 'New Password',
+  'pages.tenant.newPasswordConfirmation': 'New Password Confirmation',
 };

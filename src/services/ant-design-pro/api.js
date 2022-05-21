@@ -50,6 +50,21 @@ export async function register(body, options) {
   });
 }
 
+export async function updateUser(body, options) {
+  const domain = getDomain();
+  const token = store.get('accessToken');
+
+  return request(`${PROTOCOL}//${domain}.${HOST_NAME}/api/update`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** 登录接口 POST /api/login/account */
 
 export async function login(body, options) {

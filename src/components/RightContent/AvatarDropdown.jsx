@@ -37,7 +37,7 @@ const AvatarDropdown = ({ menu }) => {
         return;
       }
 
-      history.push(`/account/${key}`);
+      history.push(`/${key}`);
     },
     [setInitialState],
   );
@@ -67,7 +67,7 @@ const AvatarDropdown = ({ menu }) => {
     ...(menu
       ? [
           {
-            key: 'settings',
+            key: 'welcome',
             icon: <UserOutlined />,
             label: (
               <FormattedMessage id="menu.account.settings" defaultMessage="Account Settings" />
