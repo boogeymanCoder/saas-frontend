@@ -65,6 +65,21 @@ export async function updateUser(body, options) {
   });
 }
 
+export async function updateSettings(body, options) {
+  const domain = getDomain();
+  const token = store.get('accessToken');
+
+  return request(`${PROTOCOL}//${domain}.${HOST_NAME}/api/settings`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 export async function checkDomain(options) {
   const domain = getDomain();
 

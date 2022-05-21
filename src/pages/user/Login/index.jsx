@@ -16,6 +16,7 @@ import { getFakeCaptcha } from '@/services/ant-design-pro/login';
 import styles from './index.less';
 import store from 'store';
 import { getDomain } from '@/services/helpers';
+import defaultSettings from '../../../../config/defaultSettings';
 
 const LoginMessage = ({ content }) => (
   <Alert
@@ -39,9 +40,18 @@ const Login = () => {
 
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
+    var settingsToSet = defaultSettings;
+
+    console.log({ userInfo });
+    if (userInfo.settings) {
+      const userSettings = JSON.parse(userInfo?.settings);
+      settingsToSet = userSettings;
+
+      console.log('settingsToSet from user:', { settingsToSet });
+    }
 
     if (userInfo) {
-      await setInitialState((s) => ({ ...s, currentUser: userInfo }));
+      await setInitialState((s) => ({ ...s, currentUser: userInfo, settings: settingsToSet }));
     }
   };
 
