@@ -146,6 +146,7 @@ const TableList = () => {
   const [removeModalVisible, handleRemoveModalVisible] = useState(false);
   const createFormRef = useRef();
   const updateFormRef = useRef();
+  const removeFormRef = useRef();
   /**
    * @en-US The pop-up window of the distribution update window
    * @zh-CN 分布更新窗口的弹窗
@@ -451,6 +452,7 @@ const TableList = () => {
             id: 'pages.classroomTable.removeStudent',
             defaultMessage: 'Remove Student',
           })}
+          formRef={removeFormRef}
           width="400px"
           visible={removeModalVisible}
           onVisibleChange={handleRemoveModalVisible}
@@ -458,6 +460,7 @@ const TableList = () => {
             const success = await handleRemoveStudent(currentRow.id, value.student_id);
 
             if (success) {
+              removeFormRef.current.resetFields();
               handleRemoveModalVisible(false);
 
               if (actionRef.current) {
