@@ -71,9 +71,14 @@ const handleRemove = async (selectedRows) => {
     // await removeRule({
     //   key: selectedRows.map((row) => row.key),
     // });
-    selectedRows.map(async (student) => await removeSubject(student.id));
+    selectedRows.map(
+      async (student) =>
+        await removeSubject(student.id).then((res) => {
+          message.success('Deleted successfully and will refresh soon');
+        }),
+    );
+
     hide();
-    message.success('Deleted successfully and will refresh soon');
     return true;
   } catch (error) {
     hide();
