@@ -15,7 +15,7 @@ import { rule, addRule, updateRule, removeRule } from '@/services/ant-design-pro
  */
 
 const handleAdd = async (fields) => {
-  const hide = message.loading('正在添加');
+  const hide = message.loading('Loading');
 
   try {
     await addRule({ ...fields });
@@ -61,7 +61,7 @@ const handleUpdate = async (fields) => {
  */
 
 const handleRemove = async (selectedRows) => {
-  const hide = message.loading('正在删除');
+  const hide = message.loading('Loading');
   if (!selectedRows) return true;
 
   try {

@@ -6,7 +6,7 @@ const Footer = () => {
   const intl = useIntl();
   const defaultMessage = intl.formatMessage({
     id: 'app.copyright.produced',
-    defaultMessage: '蚂蚁集团体验技术部出品',
+    defaultMessage: 'Submitted by Acaso, Aro, Barcos & Guinlamon ',
   });
   const currentYear = new Date().getFullYear();
   return (
@@ -14,21 +14,21 @@ const Footer = () => {
       copyright={`${currentYear} ${defaultMessage}`}
       links={[
         {
-          key: 'Ant Design Pro',
-          title: 'Ant Design Pro',
-          href: 'https://pro.ant.design',
+          key: 'API',
+          title: 'API',
+          href: 'https://github.com/boogeymanCoder/taskme-api',
           blankTarget: true,
         },
         {
           key: 'github',
           title: <GithubOutlined />,
-          href: 'https://github.com/ant-design/ant-design-pro',
+          href: 'https://github.com/boogeymanCoder/saas-frontend',
           blankTarget: true,
         },
         {
-          key: 'Ant Design',
-          title: 'Ant Design',
-          href: 'https://ant.design',
+          key: 'Frontend',
+          title: 'Frontend',
+          href: 'https://github.com/boogeymanCoder/saas-frontend',
           blankTarget: true,
         },
       ]}

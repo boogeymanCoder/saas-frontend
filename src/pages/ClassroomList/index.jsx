@@ -31,7 +31,7 @@ import SubjectSelector, { fetchSubjects } from '@/components/Selector/SubjectSel
  */
 
 const handleAdd = async (fields) => {
-  const hide = message.loading('正在添加');
+  const hide = message.loading('Loading');
   console.log({ fields });
 
   try {
@@ -75,7 +75,7 @@ const handleUpdate = async (id, fields) => {
  */
 
 const handleRemove = async (selectedRows) => {
-  const hide = message.loading('正在删除');
+  const hide = message.loading('Loading');
   if (!selectedRows) return true;
 
   try {
@@ -316,16 +316,7 @@ const TableList = () => {
               >
                 {selectedRowsState.length}
               </a>{' '}
-              <FormattedMessage id="pages.searchTable.item" defaultMessage="项" />
-              &nbsp;&nbsp;
-              <span>
-                <FormattedMessage
-                  id="pages.searchTable.totalServiceCalls"
-                  defaultMessage="Total number of service calls"
-                />{' '}
-                {selectedRowsState.reduce((pre, item) => pre + item.callNo, 0)}{' '}
-                <FormattedMessage id="pages.searchTable.tenThousand" defaultMessage="万" />
-              </span>
+              <FormattedMessage id="pages.searchTable.item" defaultMessage="items" />
             </div>
           }
         >
