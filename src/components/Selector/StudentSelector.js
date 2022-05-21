@@ -1,11 +1,11 @@
-import { teacher } from '@/services/teacher';
+import { student } from '@/services/students';
 import { ProFormSelect } from '@ant-design/pro-form';
 import React from 'react';
 import { useIntl } from 'umi';
 
-export const fetchTeachers = async (params, currentRow) => {
+export const fetchStudents = async (params, currentRow) => {
   try {
-    const { data } = await teacher({ 'filter[full_name]': params.keyWords, 'page[size]': 1000 });
+    const { data } = await student({ 'filter[full_name]': params.keyWords, 'page[size]': 1000 });
     console.log({ data });
 
     const options = data.map((value) => {
@@ -15,10 +15,10 @@ export const fetchTeachers = async (params, currentRow) => {
       };
     });
 
-    if (currentRow?.teacher) {
+    if (currentRow?.student) {
       options.push({
-        label: `${currentRow.teacher.first_name} ${currentRow.teacher.middle_name} ${currentRow.teacher.last_name}`,
-        value: currentRow.teacher.id,
+        label: currentRow.student.name,
+        value: currentRow.student.id,
       });
     }
     console.log({ options });
@@ -28,7 +28,7 @@ export const fetchTeachers = async (params, currentRow) => {
   }
 };
 
-export default function TeacherSelector({ currentRow, ...props }) {
+export default function StudentSelector({ currentRow, ...props }) {
   const intl = useIntl();
 
   return (
@@ -39,12 +39,12 @@ export default function TeacherSelector({ currentRow, ...props }) {
         },
       ]}
       label={intl.formatMessage({
-        id: 'pages.classroomTable.teacher',
-        defaultMessage: 'Teacher',
+        id: 'pages.classroomTable.student',
+        defaultMessage: 'Student',
       })}
       showSearch
-      initialValue={currentRow && currentRow?.teacher?.id}
-      request={(params) => fetchTeachers(params, currentRow)}
+      initialValue={currentRow && currentRow?.student?.id}
+      request={(params) => fetchStudents(params, currentRow)}
       debounceTime={800}
       {...props}
     />

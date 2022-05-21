@@ -119,3 +119,20 @@ export async function findClassroomByTeacher(id, params, options) {
     ...(options || {}),
   });
 }
+
+export async function addClassroomStudent(id, student_id, options) {
+  const domain = getDomain();
+  const token = store.get('accessToken');
+
+  return request(
+    `${PROTOCOL}//${domain}.${HOST_NAME}/api/classrooms/${id}/students/${student_id}`,
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      ...(options || {}),
+    },
+  );
+}

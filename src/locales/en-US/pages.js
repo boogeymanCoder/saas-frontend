@@ -131,4 +131,8 @@ export default {
   'pages.register.password': 'Password',
   'pages.register.passwordConfirmation': 'Password Confirmation',
   'pages.register.domain': 'Domain',
+
+  // new
+  'pages.classroomTable.add': 'Add',
+  'pages.classroomTable.addStudent': 'Add Student',
 };
