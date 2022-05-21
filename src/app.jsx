@@ -3,10 +3,11 @@ import { PageLoading } from '@ant-design/pro-layout';
 import { history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
-import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
+import { checkDomain, currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
 import { getDomain } from './services/helpers';
+import { useEffect } from 'react';
 const isDev = process.env.NODE_ENV === 'development';
 const isCentralDomain = getDomain() === APP_HOST_NAME;
 const loginPath = isCentralDomain ? '/user/register' : '/user/login';
@@ -76,6 +77,19 @@ export const layout = ({ initialState, setInitialState }) => {
     // unAccessible: <div>unAccessible</div>,
     // 增加一个 loading 的状态
     childrenRender: (children, props) => {
+      useEffect(async () => {
+        try {
+          const domain = getDomain();
+          console.log({ domain, APP_HOST_NAME, isCentral: domain === APP_HOST_NAME });
+          if (!(domain === APP_HOST_NAME)) {
+            console.log('check domain');
+            const domainAvailable = (await checkDomain()).success;
+          }
+        } catch (err) {
+          console.log({ err });
+          window.location.href = `${APP_URL}/register`;
+        }
+      });
       // if (initialState?.loading) return <PageLoading />;
       return (
         <>

@@ -8,6 +8,7 @@ const { REACT_APP_ENV } = process.env;
 export default defineConfig({
   define: {
     API_URL: process.env.API_URL,
+    APP_URL: process.env.APP_URL,
     HOST_NAME: process.env.HOST_NAME,
     PROTOCOL: process.env.PROTOCOL,
     PORT: process.env.PORT,

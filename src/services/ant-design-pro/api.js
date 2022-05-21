@@ -65,6 +65,18 @@ export async function updateUser(body, options) {
   });
 }
 
+export async function checkDomain(options) {
+  const domain = getDomain();
+
+  return request(`${API_URL}/api/check_availability/${domain}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    ...(options || {}),
+  });
+}
+
 /** 登录接口 POST /api/login/account */
 
 export async function login(body, options) {
