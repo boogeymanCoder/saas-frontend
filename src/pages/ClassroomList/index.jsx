@@ -144,6 +144,7 @@ const TableList = () => {
   const [createModalVisible, handleModalVisible] = useState(false);
   const [addModalVisible, handleAddModalVisible] = useState(false);
   const [removeModalVisible, handleRemoveModalVisible] = useState(false);
+  const createFormRef = useRef();
   /**
    * @en-US The pop-up window of the distribution update window
    * @zh-CN 分布更新窗口的弹窗
@@ -470,16 +471,19 @@ const TableList = () => {
 
       <ModalForm
         title={intl.formatMessage({
-          id: 'pages.studentTable.newStudent',
-          defaultMessage: 'New Student',
+          id: 'pages.classroomTable.newClassroom',
+          defaultMessage: 'New Classroom',
         })}
         width="400px"
         visible={createModalVisible}
+        formRef={createFormRef}
         onVisibleChange={handleModalVisible}
         onFinish={async (value) => {
           const success = await handleAdd(value);
 
           if (success) {
+            createFormRef.current.resetFields();
+
             handleModalVisible(false);
 
             if (actionRef.current) {
