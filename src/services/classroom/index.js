@@ -19,6 +19,7 @@ export async function classroom(params, options) {
     .then((res) => {
       console.log({ res });
       res.data.forEach((data) => (data.key = data.id));
+      console.log({ res });
       return res;
     })
     .catch((err) => {
@@ -87,6 +88,11 @@ export async function findClassroomByStudent(id, params, options) {
     },
     params,
     ...(options || {}),
+  }).then((res) => {
+    console.log({ res });
+    res.data.forEach((data) => (data.key = data.id));
+    console.log({ res });
+    return res;
   });
 }
 
@@ -102,6 +108,11 @@ export async function findClassroomBySubject(id, params, options) {
     },
     params,
     ...(options || {}),
+  }).then((res) => {
+    console.log({ res });
+    res.data.forEach((data) => (data.key = data.id));
+    console.log({ res });
+    return res;
   });
 }
 
@@ -117,6 +128,11 @@ export async function findClassroomByTeacher(id, params, options) {
     },
     params,
     ...(options || {}),
+  }).then((res) => {
+    console.log({ res });
+    res.data.forEach((data) => (data.key = data.id));
+    console.log({ res });
+    return res;
   });
 }
 
@@ -128,6 +144,23 @@ export async function addClassroomStudent(id, student_id, options) {
     `${PROTOCOL}//${domain}.${HOST_NAME}/api/classrooms/${id}/students/${student_id}`,
     {
       method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      ...(options || {}),
+    },
+  );
+}
+
+export async function removeClassroomStudent(id, student_id, options) {
+  const domain = getDomain();
+  const token = store.get('accessToken');
+
+  return request(
+    `${PROTOCOL}//${domain}.${HOST_NAME}/api/classrooms/${id}/students/${student_id}`,
+    {
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,

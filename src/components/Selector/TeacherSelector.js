@@ -42,6 +42,7 @@ export default function TeacherSelector({ currentRow, ...props }) {
         id: 'pages.classroomTable.teacher',
         defaultMessage: 'Teacher',
       })}
+      defaultActiveFirstOption={currentRow}
       showSearch
       initialValue={currentRow && currentRow?.teacher?.id}
       request={(params) => fetchTeachers(params, currentRow)}

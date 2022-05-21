@@ -135,4 +135,8 @@ export default {
   // new
   'pages.classroomTable.add': 'Add',
   'pages.classroomTable.addStudent': 'Add Student',
+  'pages.classroomTable.remove': 'Remove',
+  'pages.classroomTable.removeStudent': 'Remove Student',
+  'pages.welcome.message': 'Welcome to Student Management System Admin',
+  'pages.classroomTable.student': 'Student',
 };
