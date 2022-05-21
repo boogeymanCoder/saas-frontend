@@ -98,6 +98,7 @@ const TableList = () => {
   const pageParams = useParams();
   console.log({ pageParams });
   const [createModalVisible, handleModalVisible] = useState(false);
+  const createFormRef = useRef();
   /**
    * @en-US The pop-up window of the distribution update window
    * @zh-CN 分布更新窗口的弹窗
@@ -349,12 +350,14 @@ const TableList = () => {
           defaultMessage: 'New Student',
         })}
         width="400px"
+        formRef={createFormRef}
         visible={createModalVisible}
         onVisibleChange={handleModalVisible}
         onFinish={async (value) => {
           const success = await handleAdd(value);
 
           if (success) {
+            createFormRef.current.resetFields();
             handleModalVisible(false);
 
             if (actionRef.current) {
