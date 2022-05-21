@@ -128,4 +128,17 @@ export default {
   'pages.register.password': '密码',
   'pages.register.passwordConfirmation': '确认密码',
   'pages.register.domain': '领域',
+
+  'pages.classroomTable.add': '添加',
+  'pages.classroomTable.addStudent': '添加学生',
+  'pages.classroomTable.remove': '消除',
+  'pages.classroomTable.removeStudent': '删除学生',
+  'pages.welcome.message': '欢迎来到 Student Management System Admin',
+  'pages.classroomTable.student': '学生',
+
+  'pages.tenant.name': '姓名',
+  'pages.tenant.email': '电子邮件',
+  'pages.tenant.oldPassword': '旧密码',
+  'pages.tenant.newPassword': '新密码',
+  'pages.tenant.newPasswordConfirmation': '新密码确认',
 };

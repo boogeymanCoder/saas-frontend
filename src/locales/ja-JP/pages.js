@@ -127,4 +127,17 @@ export default {
   'pages.register.password': 'パスワード',
   'pages.register.passwordConfirmation': 'パスワードの確認',
   'pages.register.domain': 'ドメイン',
+
+  'pages.classroomTable.add': '追加',
+  'pages.classroomTable.addStudent': '学生を追加します',
+  'pages.classroomTable.remove': '削除する',
+  'pages.classroomTable.removeStudent': '学生を削除します',
+  'pages.welcome.message': 'ようこそ Student Management System Admin',
+  'pages.classroomTable.student': '学生',
+
+  'pages.tenant.name': '名前',
+  'pages.tenant.email': 'Eメール',
+  'pages.tenant.oldPassword': '以前のパスワード',
+  'pages.tenant.newPassword': '新しいパスワード',
+  'pages.tenant.newPasswordConfirmation': '新しいパスワードの確認',
 };

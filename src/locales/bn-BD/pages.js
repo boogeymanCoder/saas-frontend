@@ -131,4 +131,17 @@ export default {
   'pages.register.password': 'পাসওয়ার্ড',
   'pages.register.passwordConfirmation': 'পাসওয়ার্ড নিশ্চিতকরণ',
   'pages.register.domain': 'ডোমেইন',
+
+  'pages.classroomTable.add': 'যোগ করুন',
+  'pages.classroomTable.addStudent': 'ছাত্র যোগ করুন',
+  'pages.classroomTable.remove': 'অপসারণ',
+  'pages.classroomTable.removeStudent': 'ছাত্র সরান',
+  'pages.welcome.message': 'স্বাগতম Student Management System Admin',
+  'pages.classroomTable.student': 'ছাত্র',
+
+  'pages.tenant.name': 'নাম',
+  'pages.tenant.email': 'ইমেল',
+  'pages.tenant.oldPassword': 'পুরানো পাসওয়ার্ড',
+  'pages.tenant.newPassword': 'নতুন পাসওয়ার্ড',
+  'pages.tenant.newPasswordConfirmation': 'নতুন পাসওয়ার্ড নিশ্চিতকরণ',
 };

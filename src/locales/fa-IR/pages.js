@@ -128,4 +128,17 @@ export default {
   'pages.register.password': 'کلمه عبور',
   'pages.register.passwordConfirmation': 'تایید رمز عبور',
   'pages.register.domain': 'دامنه',
+
+  'pages.classroomTable.add': 'اضافه کردن',
+  'pages.classroomTable.addStudent': 'دانش آموز را اضافه کنید',
+  'pages.classroomTable.remove': 'برداشتن',
+  'pages.classroomTable.removeStudent': 'دانش آموز را حذف کنید',
+  'pages.welcome.message': 'خوش آمدید به Student Management System Admin',
+  'pages.classroomTable.student': 'دانشجو',
+
+  'pages.tenant.name': 'نام',
+  'pages.tenant.email': 'پست الکترونیک',
+  'pages.tenant.oldPassword': 'رمز عبور قدیمی',
+  'pages.tenant.newPassword': 'رمز عبور جدید',
+  'pages.tenant.newPasswordConfirmation': 'تایید رمز عبور جدید',
 };

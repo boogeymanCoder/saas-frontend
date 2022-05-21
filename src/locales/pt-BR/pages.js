@@ -131,4 +131,17 @@ export default {
   'pages.register.password': 'Senha',
   'pages.register.passwordConfirmation': 'ConfirmaÇão Da Senha',
   'pages.register.domain': 'Domínio',
+
+  'pages.classroomTable.add': 'Adicionar',
+  'pages.classroomTable.addStudent': 'Adicionar aluno',
+  'pages.classroomTable.remove': 'Remover',
+  'pages.classroomTable.removeStudent': 'Remova o aluno',
+  'pages.welcome.message': 'Bem-vindo ao Student Management System Admin',
+  'pages.classroomTable.student': 'Aluna',
+
+  'pages.tenant.name': 'Nome',
+  'pages.tenant.email': 'E-mail',
+  'pages.tenant.oldPassword': 'Senha Antiga',
+  'pages.tenant.newPassword': 'Nova Senha',
+  'pages.tenant.newPasswordConfirmation': 'Nova confirmação de senha',
 };

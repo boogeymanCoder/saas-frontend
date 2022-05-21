@@ -131,4 +131,17 @@ export default {
   'pages.register.password': 'Kata sandi',
   'pages.register.passwordConfirmation': 'Konfirmasi kata kunci',
   'pages.register.domain': 'domain',
+
+  'pages.classroomTable.add': 'Menambahkan',
+  'pages.classroomTable.addStudent': 'Tambahkan siswa',
+  'pages.classroomTable.remove': 'Menghapus',
+  'pages.classroomTable.removeStudent': 'Hapus siswa',
+  'pages.welcome.message': 'Selamat Datang di Student Management System Admin',
+  'pages.classroomTable.student': 'Murid',
+
+  'pages.tenant.name': 'Nama',
+  'pages.tenant.email': 'Surel',
+  'pages.tenant.oldPassword': 'password lama',
+  'pages.tenant.newPassword': 'kata sandi baru',
+  'pages.tenant.newPasswordConfirmation': 'Konfirmasi Kata Sandi Baru',
 };
