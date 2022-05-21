@@ -54,7 +54,7 @@ const Login = () => {
       if (msg.success) {
         const defaultLoginSuccessMessage = intl.formatMessage({
           id: 'pages.login.success',
-          defaultMessage: '登录成功！',
+          defaultMessage: 'Login Successful！',
         });
         message.success(defaultLoginSuccessMessage);
 
@@ -76,7 +76,7 @@ const Login = () => {
     } catch (error) {
       const defaultLoginFailureMessage = intl.formatMessage({
         id: 'pages.login.failure',
-        defaultMessage: '登录失败，请重试！',
+        defaultMessage: 'Login failed, please try again!',
       });
       message.error(defaultLoginFailureMessage);
     }
@@ -107,8 +107,8 @@ const Login = () => {
       setUserLoginState(msg);
     } catch (error) {
       const defaultLoginFailureMessage = intl.formatMessage({
-        id: 'pages.login.failure',
-        defaultMessage: '登录失败，请重试！',
+        id: 'pages.register.failure',
+        defaultMessage: 'Register failed, please try again!',
       });
       message.error(defaultLoginFailureMessage);
     }
@@ -124,7 +124,7 @@ const Login = () => {
         {!isCentralDomain && (
           <LoginForm
             logo={<img alt="logo" src="/logo.svg" />}
-            title="Ant Design"
+            title="SAAS SMS"
             subTitle={intl.formatMessage({
               id: 'pages.layouts.userLayout.title',
             })}
@@ -148,7 +148,7 @@ const Login = () => {
                 key="account"
                 tab={intl.formatMessage({
                   id: 'pages.login.accountLogin.tab',
-                  defaultMessage: '账户密码登录',
+                  defaultMessage: 'Account Login',
                 })}
               />
             </Tabs>
@@ -157,7 +157,7 @@ const Login = () => {
               <LoginMessage
                 content={intl.formatMessage({
                   id: 'pages.login.accountLogin.errorMessage',
-                  defaultMessage: '账户或密码错误(admin/ant.design)',
+                  defaultMessage: 'Incorrect username/password',
                 })}
               />
             )}
@@ -235,7 +235,7 @@ const Login = () => {
               <LoginMessage
                 content={intl.formatMessage({
                   id: 'pages.login.accountLogin.errorMessage',
-                  defaultMessage: '账户或密码错误(admin/ant.design)',
+                  defaultMessage: 'Incorrect username/password',
                 })}
               />
             )}

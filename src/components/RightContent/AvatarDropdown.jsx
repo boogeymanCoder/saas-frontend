@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu, Spin } from 'antd';
-import { history, useModel } from 'umi';
+import { history, useModel, FormattedMessage } from 'umi';
 import { stringify } from 'querystring';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
@@ -67,24 +67,26 @@ const AvatarDropdown = ({ menu }) => {
     ...(menu
       ? [
           {
-            key: 'center',
-            icon: <UserOutlined />,
-            label: '个人中心',
-          },
-          {
             key: 'settings',
-            icon: <SettingOutlined />,
-            label: '个人设置',
+            icon: <UserOutlined />,
+            label: (
+              <FormattedMessage id="menu.account.settings" defaultMessage="Account Settings" />
+            ),
           },
-          {
-            type: 'divider',
-          },
+          // {
+          //   key: 'settings',
+          //   icon: <SettingOutlined />,
+          //   label: '个人设置',
+          // },
+          // {
+          //   type: 'divider',
+          // },
         ]
       : []),
     {
       key: 'logout',
       icon: <LogoutOutlined />,
-      label: '退出登录',
+      label: <FormattedMessage id="menu.account.logout" defaultMessage="Logout" />,
     },
   ];
   const menuHeaderDropdown = (
@@ -93,7 +95,7 @@ const AvatarDropdown = ({ menu }) => {
   return (
     <HeaderDropdown overlay={menuHeaderDropdown}>
       <span className={`${styles.action} ${styles.account}`}>
-        <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
+        <Avatar size="small" className={styles.avatar} icon={<UserOutlined />} alt="avatar" />
         <span className={`${styles.name} anticon`}>{currentUser.name}</span>
       </span>
     </HeaderDropdown>

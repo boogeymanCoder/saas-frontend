@@ -100,7 +100,7 @@ const NoticeIconView = () => {
         return notice;
       }),
     );
-    message.success(`${'清空了'} ${title}`);
+    message.success(`${'Cleared'} ${title}`);
   };
 
   return (
@@ -112,8 +112,8 @@ const NoticeIconView = () => {
       }}
       onClear={(title, key) => clearReadState(title, key)}
       loading={false}
-      clearText="清空"
-      viewMoreText="查看更多"
+      clearText="Clear"
+      viewMoreText="More"
       onViewMore={() => message.info('Click on view more')}
       clearClose
     >
