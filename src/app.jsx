@@ -129,7 +129,10 @@ export const layout = ({ initialState, setInitialState }) => {
         <>
           {children}
           {/* {console.log('before drawer:', { initialState })} */}
-          {!props.location?.pathname?.includes('/login') && (
+          {!(
+            props.location?.pathname?.includes('/login') ||
+            props.location?.pathname?.includes('/register')
+          ) && (
             <SettingDrawer
               disableUrlParams
               enableDarkTheme
