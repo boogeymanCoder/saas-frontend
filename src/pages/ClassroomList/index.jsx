@@ -256,7 +256,7 @@ const TableList = () => {
       title: <FormattedMessage id="pages.table.actions" defaultMessage="Actions" />,
       dataIndex: 'option',
       valueType: 'option',
-      width: 100,
+      width: 200,
       fixed: 'right',
       render: (_, record) => [
         <Tooltip
@@ -335,7 +335,7 @@ const TableList = () => {
           defaultMessage: 'Enquiry form',
         })}
         scroll={{
-          x: 550,
+          x: 650,
         }}
         actionRef={actionRef}
         rowKey="key"
