@@ -450,6 +450,8 @@ const TableList = () => {
           rules={[
             {
               required: true,
+              type: 'email',
+              message: 'Please enter a valid email address.',
             },
           ]}
           label={intl.formatMessage({

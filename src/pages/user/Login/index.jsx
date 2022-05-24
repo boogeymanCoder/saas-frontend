@@ -186,6 +186,8 @@ const Login = () => {
                   rules={[
                     {
                       required: true,
+                      type: 'email',
+                      message: 'Please enter a valid email address.',
                     },
                   ]}
                 />
@@ -280,6 +282,8 @@ const Login = () => {
                   rules={[
                     {
                       required: true,
+                      type: 'email',
+                      message: 'Please enter a valid email address.',
                     },
                   ]}
                 />
